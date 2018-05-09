@@ -1,0 +1,465 @@
+{
+  "CachedResponseId": "219788",
+  "ProviderSvcTime": "31.9989",
+  "Rates": [
+    {
+      "PartnerSpecificFields": {
+        "FlexFields": []
+      },
+      "AlternateFinancingMode": 0,
+      "BaseNoUpgradeProductRates": null,
+      "RatedCoverage": {
+        "PartnerSpecificFields": {
+          "FlexFields": [
+            {
+              "FieldName": "RATEID",
+              "FieldType": 2,
+              "FieldValue": "0"
+            },
+            {
+              "FieldName": "RATEBOOK",
+              "FieldType": 2,
+              "FieldValue": "0"
+            },
+            {
+              "FieldName": "VEHICLECLASS",
+              "FieldType": 2,
+              "FieldValue": "0001"
+            },
+            {
+              "FieldName": "COVERAGEID",
+              "FieldType": 2,
+              "FieldValue": "12"
+            }
+          ]
+        },
+        "Abbreviation": "T.Select",
+        "Description": "Select Time only",
+        "DisplayName": "Select Time only",
+        "InternalCoverageId": "T.Select",
+        "IsLWBaseCoverage": false,
+        "NumericValue": 0,
+        "PartnerCode": "T.Select"
+      },
+      "RatedDeductible": {
+        "PartnerSpecificFields": {
+          "FlexFields": [
+            {
+              "FieldName": "DEDUCTIBLETYPE",
+              "FieldType": 2,
+              "FieldValue": "V"
+            },
+            {
+              "FieldName": "DEDUCTIBLEID",
+              "FieldType": 2,
+              "FieldValue": "1"
+            }
+          ]
+        },
+        "Abbreviation": "000",
+        "DisplayName": "0",
+        "InternalDeductibleId": "0.00",
+        "NumericValue": 0,
+        "PartnerCode": "000"
+      },
+      "RatedProduct": {
+        "PartnerSpecificFields": {
+          "FlexFields": [
+            {
+              "FieldName": "FORMPREFIX",
+              "FieldType": 2,
+              "FieldValue": "SLX"
+            }
+          ]
+        },
+        "ApplicationCode": null,
+        "BaseNoUpgradeProduct": null,
+        "CertificationType": 0,
+        "DisplayName": "EC Select 3 StandAlone 2014 (US):2607",
+        "InternalProductId": "C1032607",
+        "InternalProductVersionId": null,
+        "InternalRatingProgramId": null,
+        "IsDealerException": false,
+        "IsInserviceRequired": false,
+        "IsNewCoverage": false,
+        "IsVehicleFinancialsRequired": false,
+        "IsWrapCoverage": false,
+        "ParentProductType": {
+          "PartnerSpecificFields": {
+            "FlexFields": []
+          },
+          "ApplicationCode": "ECS",
+          "ApplicationSubCode": null,
+          "DisplayName": null,
+          "InternalProductTypeId": null,
+          "ParentProductRatingCategory": {
+            "PartnerSpecificFields": {
+              "FlexFields": []
+            },
+            "Abbreviation": "ECS",
+            "ApplicationCode": "ECS",
+            "DisplayName": null
+          },
+          "PartnerCode": "ECS",
+          "ProfitSettingCategoryName": null,
+          "SettingDependentSubCode": null,
+          "UpgradesInternalProductTypeId": null
+        },
+        "PartnerCode": null,
+        "ProductCoverages": null,
+        "ProductOptions": null,
+        "RateCalculationMethod": 0,
+        "SortOrder": null,
+        "UpgradeProducts": null
+      },
+      "RatedTerms": [
+        {
+          "PartnerSpecificFields": {
+            "FlexFields": [
+              {
+                "FieldName": "PROFIT",
+                "FieldType": 1,
+                "FieldValue": "0"
+              },
+              {
+                "FieldName": "LWUPGRADEYN",
+                "FieldType": 2,
+                "FieldValue": "N"
+              }
+            ]
+          },
+          "BasePremium": 0,
+          "CanRetailBeModified": true,
+          "DealerCost": 98,
+          "DealerInternalPack": 0,
+          "DebugInfo": null,
+          "InternalPremiumId": null,
+          "MarkupBaseMode": 0,
+          "MaxRetailCostAllowed": 0,
+          "MinRetailCostAllowed": 0,
+          "NegotiatedRetailCost": 0,
+          "RatedProductOptions": null,
+          "RatedTerm": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "LWBASECOVERAGEYN",
+                  "FieldType": 2,
+                  "FieldValue": "N"
+                },
+                {
+                  "FieldName": "PLANCODE",
+                  "FieldType": 2,
+                  "FieldValue": "2fdc652c-cc45-40ab-983b-133c1e322ea0"
+                }
+              ]
+            },
+            "Abbreviation": null,
+            "DisplayName": "24mo",
+            "InternalTermId": "24+999999",
+            "PartnerCode": "2fdc652c-cc45-40ab-983b-133c1e322ea0",
+            "TermMiles": 999999,
+            "TermMonths": 24
+          },
+          "RegulatedCommissionPerc": 0,
+          "RetailCost": 98,
+          "RetailRegulatedMode": 0,
+          "SavedRateScenarioId": null,
+          "SavedRateSessionId": null,
+          "SavedRateUniqueId": null,
+          "TotalFees": 0,
+          "TotalPremiumAdjustments": 0
+        },
+        {
+          "PartnerSpecificFields": {
+            "FlexFields": [
+              {
+                "FieldName": "PROFIT",
+                "FieldType": 1,
+                "FieldValue": "0"
+              },
+              {
+                "FieldName": "LWUPGRADEYN",
+                "FieldType": 2,
+                "FieldValue": "N"
+              }
+            ]
+          },
+          "BasePremium": 0,
+          "CanRetailBeModified": true,
+          "DealerCost": 133,
+          "DealerInternalPack": 0,
+          "DebugInfo": null,
+          "InternalPremiumId": null,
+          "MarkupBaseMode": 0,
+          "MaxRetailCostAllowed": 0,
+          "MinRetailCostAllowed": 0,
+          "NegotiatedRetailCost": 0,
+          "RatedProductOptions": null,
+          "RatedTerm": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "LWBASECOVERAGEYN",
+                  "FieldType": 2,
+                  "FieldValue": "N"
+                },
+                {
+                  "FieldName": "PLANCODE",
+                  "FieldType": 2,
+                  "FieldValue": "d8a67de1-b06f-4433-bdc4-b8a6f6cd5797"
+                }
+              ]
+            },
+            "Abbreviation": null,
+            "DisplayName": "36mo",
+            "InternalTermId": "36+999999",
+            "PartnerCode": "d8a67de1-b06f-4433-bdc4-b8a6f6cd5797",
+            "TermMiles": 999999,
+            "TermMonths": 36
+          },
+          "RegulatedCommissionPerc": 0,
+          "RetailCost": 133,
+          "RetailRegulatedMode": 0,
+          "SavedRateScenarioId": null,
+          "SavedRateSessionId": null,
+          "SavedRateUniqueId": null,
+          "TotalFees": 0,
+          "TotalPremiumAdjustments": 0
+        },
+        {
+          "PartnerSpecificFields": {
+            "FlexFields": [
+              {
+                "FieldName": "PROFIT",
+                "FieldType": 1,
+                "FieldValue": "0"
+              },
+              {
+                "FieldName": "LWUPGRADEYN",
+                "FieldType": 2,
+                "FieldValue": "N"
+              }
+            ]
+          },
+          "BasePremium": 0,
+          "CanRetailBeModified": true,
+          "DealerCost": 137,
+          "DealerInternalPack": 0,
+          "DebugInfo": null,
+          "InternalPremiumId": null,
+          "MarkupBaseMode": 0,
+          "MaxRetailCostAllowed": 0,
+          "MinRetailCostAllowed": 0,
+          "NegotiatedRetailCost": 0,
+          "RatedProductOptions": null,
+          "RatedTerm": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "LWBASECOVERAGEYN",
+                  "FieldType": 2,
+                  "FieldValue": "N"
+                },
+                {
+                  "FieldName": "PLANCODE",
+                  "FieldType": 2,
+                  "FieldValue": "3cb993f9-aa80-4bf6-94d6-dc5e060c52a2"
+                }
+              ]
+            },
+            "Abbreviation": null,
+            "DisplayName": "39mo",
+            "InternalTermId": "39+999999",
+            "PartnerCode": "3cb993f9-aa80-4bf6-94d6-dc5e060c52a2",
+            "TermMiles": 999999,
+            "TermMonths": 39
+          },
+          "RegulatedCommissionPerc": 0,
+          "RetailCost": 137,
+          "RetailRegulatedMode": 0,
+          "SavedRateScenarioId": null,
+          "SavedRateSessionId": null,
+          "SavedRateUniqueId": null,
+          "TotalFees": 0,
+          "TotalPremiumAdjustments": 0
+        },
+        {
+          "PartnerSpecificFields": {
+            "FlexFields": [
+              {
+                "FieldName": "PROFIT",
+                "FieldType": 1,
+                "FieldValue": "0"
+              },
+              {
+                "FieldName": "LWUPGRADEYN",
+                "FieldType": 2,
+                "FieldValue": "N"
+              }
+            ]
+          },
+          "BasePremium": 0,
+          "CanRetailBeModified": true,
+          "DealerCost": 147,
+          "DealerInternalPack": 0,
+          "DebugInfo": null,
+          "InternalPremiumId": null,
+          "MarkupBaseMode": 0,
+          "MaxRetailCostAllowed": 0,
+          "MinRetailCostAllowed": 0,
+          "NegotiatedRetailCost": 0,
+          "RatedProductOptions": null,
+          "RatedTerm": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "LWBASECOVERAGEYN",
+                  "FieldType": 2,
+                  "FieldValue": "N"
+                },
+                {
+                  "FieldName": "PLANCODE",
+                  "FieldType": 2,
+                  "FieldValue": "a1674239-34a2-41d9-a751-da71df074445"
+                }
+              ]
+            },
+            "Abbreviation": null,
+            "DisplayName": "42mo",
+            "InternalTermId": "42+999999",
+            "PartnerCode": "a1674239-34a2-41d9-a751-da71df074445",
+            "TermMiles": 999999,
+            "TermMonths": 42
+          },
+          "RegulatedCommissionPerc": 0,
+          "RetailCost": 147,
+          "RetailRegulatedMode": 0,
+          "SavedRateScenarioId": null,
+          "SavedRateSessionId": null,
+          "SavedRateUniqueId": null,
+          "TotalFees": 0,
+          "TotalPremiumAdjustments": 0
+        },
+        {
+          "PartnerSpecificFields": {
+            "FlexFields": [
+              {
+                "FieldName": "PROFIT",
+                "FieldType": 1,
+                "FieldValue": "0"
+              },
+              {
+                "FieldName": "LWUPGRADEYN",
+                "FieldType": 2,
+                "FieldValue": "N"
+              }
+            ]
+          },
+          "BasePremium": 0,
+          "CanRetailBeModified": true,
+          "DealerCost": 160,
+          "DealerInternalPack": 0,
+          "DebugInfo": null,
+          "InternalPremiumId": null,
+          "MarkupBaseMode": 0,
+          "MaxRetailCostAllowed": 0,
+          "MinRetailCostAllowed": 0,
+          "NegotiatedRetailCost": 0,
+          "RatedProductOptions": null,
+          "RatedTerm": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "LWBASECOVERAGEYN",
+                  "FieldType": 2,
+                  "FieldValue": "N"
+                },
+                {
+                  "FieldName": "PLANCODE",
+                  "FieldType": 2,
+                  "FieldValue": "3832add9-1122-4bed-94ea-96340a7d69ec"
+                }
+              ]
+            },
+            "Abbreviation": null,
+            "DisplayName": "48mo",
+            "InternalTermId": "48+999999",
+            "PartnerCode": "3832add9-1122-4bed-94ea-96340a7d69ec",
+            "TermMiles": 999999,
+            "TermMonths": 48
+          },
+          "RegulatedCommissionPerc": 0,
+          "RetailCost": 160,
+          "RetailRegulatedMode": 0,
+          "SavedRateScenarioId": null,
+          "SavedRateSessionId": null,
+          "SavedRateUniqueId": null,
+          "TotalFees": 0,
+          "TotalPremiumAdjustments": 0
+        },
+        {
+          "PartnerSpecificFields": {
+            "FlexFields": [
+              {
+                "FieldName": "PROFIT",
+                "FieldType": 1,
+                "FieldValue": "0"
+              },
+              {
+                "FieldName": "LWUPGRADEYN",
+                "FieldType": 2,
+                "FieldValue": "N"
+              }
+            ]
+          },
+          "BasePremium": 0,
+          "CanRetailBeModified": true,
+          "DealerCost": 178,
+          "DealerInternalPack": 0,
+          "DebugInfo": null,
+          "InternalPremiumId": null,
+          "MarkupBaseMode": 0,
+          "MaxRetailCostAllowed": 0,
+          "MinRetailCostAllowed": 0,
+          "NegotiatedRetailCost": 0,
+          "RatedProductOptions": null,
+          "RatedTerm": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "LWBASECOVERAGEYN",
+                  "FieldType": 2,
+                  "FieldValue": "N"
+                },
+                {
+                  "FieldName": "PLANCODE",
+                  "FieldType": 2,
+                  "FieldValue": "cb8378ac-7b67-4d16-b393-ffb4f8a8d58f"
+                }
+              ]
+            },
+            "Abbreviation": null,
+            "DisplayName": "60mo",
+            "InternalTermId": "60+999999",
+            "PartnerCode": "cb8378ac-7b67-4d16-b393-ffb4f8a8d58f",
+            "TermMiles": 999999,
+            "TermMonths": 60
+          },
+          "RegulatedCommissionPerc": 0,
+          "RetailCost": 178,
+          "RetailRegulatedMode": 0,
+          "SavedRateScenarioId": null,
+          "SavedRateSessionId": null,
+          "SavedRateUniqueId": null,
+          "TotalFees": 0,
+          "TotalPremiumAdjustments": 0
+        }
+      ],
+      "RatedVehicleClass": null
+    }
+  ],
+  "TotalSvcTime": "43.9986",
+  "quoteSessionNumber": "80e41086-7bfc-4719-983f-843b8509cbb1",
+  "rateSessionId": ""
+}

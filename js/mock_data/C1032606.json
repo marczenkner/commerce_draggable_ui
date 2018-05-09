@@ -1,0 +1,348 @@
+{
+  "CachedResponseId": "219789",
+  "ProviderSvcTime": "13.9993",
+  "Rates": [
+    {
+      "PartnerSpecificFields": {
+        "FlexFields": []
+      },
+      "AlternateFinancingMode": 0,
+      "BaseNoUpgradeProductRates": [
+        {
+          "PartnerSpecificFields": {
+            "FlexFields": []
+          },
+          "BaseRatedCoverage": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "RATEID",
+                  "FieldType": 2,
+                  "FieldValue": "1472"
+                },
+                {
+                  "FieldName": "RATEBOOK",
+                  "FieldType": 2,
+                  "FieldValue": "6"
+                },
+                {
+                  "FieldName": "VEHICLECLASS",
+                  "FieldType": 2,
+                  "FieldValue": "0001"
+                },
+                {
+                  "FieldName": "COVERAGEID",
+                  "FieldType": 2,
+                  "FieldValue": "18"
+                }
+              ]
+            },
+            "Abbreviation": "T.Select",
+            "Description": "Select Time only",
+            "DisplayName": "Select Time only",
+            "InternalCoverageId": "T.Select",
+            "IsLWBaseCoverage": false,
+            "NumericValue": 0,
+            "PartnerCode": "T.Select"
+          },
+          "BaseRatedDeductible": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "DEDUCTIBLETYPE",
+                  "FieldType": 2,
+                  "FieldValue": "V"
+                }
+              ]
+            },
+            "Abbreviation": "000",
+            "DisplayName": "0",
+            "InternalDeductibleId": "0.00",
+            "NumericValue": 0,
+            "PartnerCode": "000"
+          },
+          "BaseRatedProduct": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "FORMPREFIX",
+                  "FieldType": 2,
+                  "FieldValue": "SL"
+                },
+                {
+                  "FieldName": "PROGRAMUPGRADEVALUE_1",
+                  "FieldType": 2,
+                  "FieldValue": "C1032607"
+                },
+                {
+                  "FieldName": "PROGRAMUPGRADEPREFIX_1",
+                  "FieldType": 2,
+                  "FieldValue": "SLX"
+                }
+              ]
+            },
+            "ApplicationCode": null,
+            "BaseNoUpgradeProduct": null,
+            "CertificationType": 0,
+            "DisplayName": "EC Select 3 GiveAway 2014 (US):2606",
+            "InternalProductId": "C1032606",
+            "InternalProductVersionId": null,
+            "InternalRatingProgramId": null,
+            "IsDealerException": false,
+            "IsInserviceRequired": false,
+            "IsNewCoverage": false,
+            "IsVehicleFinancialsRequired": false,
+            "IsWrapCoverage": false,
+            "ParentProductType": {
+              "PartnerSpecificFields": {
+                "FlexFields": []
+              },
+              "ApplicationCode": "ECS",
+              "ApplicationSubCode": null,
+              "DisplayName": null,
+              "InternalProductTypeId": null,
+              "ParentProductRatingCategory": {
+                "PartnerSpecificFields": {
+                  "FlexFields": []
+                },
+                "Abbreviation": "ECS",
+                "ApplicationCode": "ECS",
+                "DisplayName": null
+              },
+              "PartnerCode": "ECS",
+              "ProfitSettingCategoryName": null,
+              "SettingDependentSubCode": null,
+              "UpgradesInternalProductTypeId": null
+            },
+            "PartnerCode": null,
+            "ProductCoverages": null,
+            "ProductOptions": null,
+            "RateCalculationMethod": 0,
+            "SortOrder": null,
+            "UpgradeProducts": null
+          },
+          "BaseRatedTerm": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "PROFIT",
+                  "FieldType": 1,
+                  "FieldValue": "0"
+                }
+              ]
+            },
+            "BasePremium": 0,
+            "CanRetailBeModified": false,
+            "DealerCost": 44,
+            "DealerInternalPack": 0,
+            "DebugInfo": null,
+            "InternalPremiumId": null,
+            "MarkupBaseMode": 0,
+            "MaxRetailCostAllowed": 0,
+            "MinRetailCostAllowed": 0,
+            "NegotiatedRetailCost": 0,
+            "RatedProductOptions": null,
+            "RatedTerm": {
+              "PartnerSpecificFields": {
+                "FlexFields": [
+                  {
+                    "FieldName": "LWBASECOVERAGEYN",
+                    "FieldType": 2,
+                    "FieldValue": "Y"
+                  },
+                  {
+                    "FieldName": "PLANCODE",
+                    "FieldType": 2,
+                    "FieldValue": "e80cc647-cef7-4a0e-92d3-c69634d7f7c4"
+                  }
+                ]
+              },
+              "Abbreviation": null,
+              "DisplayName": "6mo",
+              "InternalTermId": "6+999999",
+              "PartnerCode": "e80cc647-cef7-4a0e-92d3-c69634d7f7c4",
+              "TermMiles": 999999,
+              "TermMonths": 6
+            },
+            "RegulatedCommissionPerc": 0,
+            "RetailCost": 0,
+            "RetailRegulatedMode": 0,
+            "SavedRateScenarioId": null,
+            "SavedRateSessionId": null,
+            "SavedRateUniqueId": null,
+            "TotalFees": 0,
+            "TotalPremiumAdjustments": 0
+          },
+          "BaseRatedVehicleClass": null
+        }
+      ],
+      "RatedCoverage": {
+        "PartnerSpecificFields": {
+          "FlexFields": [
+            {
+              "FieldName": "RATEID",
+              "FieldType": 2,
+              "FieldValue": "1472"
+            },
+            {
+              "FieldName": "RATEBOOK",
+              "FieldType": 2,
+              "FieldValue": "6"
+            },
+            {
+              "FieldName": "VEHICLECLASS",
+              "FieldType": 2,
+              "FieldValue": "0001"
+            },
+            {
+              "FieldName": "COVERAGEID",
+              "FieldType": 2,
+              "FieldValue": "18"
+            }
+          ]
+        },
+        "Abbreviation": "T.Select",
+        "Description": "Select Time only",
+        "DisplayName": "Select Time only",
+        "InternalCoverageId": "T.Select",
+        "IsLWBaseCoverage": false,
+        "NumericValue": 0,
+        "PartnerCode": "T.Select"
+      },
+      "RatedDeductible": {
+        "PartnerSpecificFields": {
+          "FlexFields": [
+            {
+              "FieldName": "DEDUCTIBLETYPE",
+              "FieldType": 2,
+              "FieldValue": "V"
+            }
+          ]
+        },
+        "Abbreviation": "000",
+        "DisplayName": "0",
+        "InternalDeductibleId": "0.00",
+        "NumericValue": 0,
+        "PartnerCode": "000"
+      },
+      "RatedProduct": {
+        "PartnerSpecificFields": {
+          "FlexFields": [
+            {
+              "FieldName": "FORMPREFIX",
+              "FieldType": 2,
+              "FieldValue": "SL"
+            },
+            {
+              "FieldName": "PROGRAMUPGRADEVALUE_1",
+              "FieldType": 2,
+              "FieldValue": "C1032607"
+            },
+            {
+              "FieldName": "PROGRAMUPGRADEPREFIX_1",
+              "FieldType": 2,
+              "FieldValue": "SLX"
+            }
+          ]
+        },
+        "ApplicationCode": null,
+        "BaseNoUpgradeProduct": null,
+        "CertificationType": 0,
+        "DisplayName": "EC Select 3 GiveAway 2014 (US):2606",
+        "InternalProductId": "C1032606",
+        "InternalProductVersionId": null,
+        "InternalRatingProgramId": null,
+        "IsDealerException": false,
+        "IsInserviceRequired": false,
+        "IsNewCoverage": false,
+        "IsVehicleFinancialsRequired": false,
+        "IsWrapCoverage": false,
+        "ParentProductType": {
+          "PartnerSpecificFields": {
+            "FlexFields": []
+          },
+          "ApplicationCode": "ECS",
+          "ApplicationSubCode": null,
+          "DisplayName": null,
+          "InternalProductTypeId": null,
+          "ParentProductRatingCategory": {
+            "PartnerSpecificFields": {
+              "FlexFields": []
+            },
+            "Abbreviation": "ECS",
+            "ApplicationCode": "ECS",
+            "DisplayName": null
+          },
+          "PartnerCode": "ECS",
+          "ProfitSettingCategoryName": null,
+          "SettingDependentSubCode": null,
+          "UpgradesInternalProductTypeId": null
+        },
+        "PartnerCode": null,
+        "ProductCoverages": null,
+        "ProductOptions": null,
+        "RateCalculationMethod": 0,
+        "SortOrder": null,
+        "UpgradeProducts": null
+      },
+      "RatedTerms": [
+        {
+          "PartnerSpecificFields": {
+            "FlexFields": [
+              {
+                "FieldName": "PROFIT",
+                "FieldType": 1,
+                "FieldValue": "0"
+              }
+            ]
+          },
+          "BasePremium": 0,
+          "CanRetailBeModified": false,
+          "DealerCost": 44,
+          "DealerInternalPack": 0,
+          "DebugInfo": null,
+          "InternalPremiumId": null,
+          "MarkupBaseMode": 0,
+          "MaxRetailCostAllowed": 0,
+          "MinRetailCostAllowed": 0,
+          "NegotiatedRetailCost": 0,
+          "RatedProductOptions": null,
+          "RatedTerm": {
+            "PartnerSpecificFields": {
+              "FlexFields": [
+                {
+                  "FieldName": "LWBASECOVERAGEYN",
+                  "FieldType": 2,
+                  "FieldValue": "Y"
+                },
+                {
+                  "FieldName": "PLANCODE",
+                  "FieldType": 2,
+                  "FieldValue": "e80cc647-cef7-4a0e-92d3-c69634d7f7c4"
+                }
+              ]
+            },
+            "Abbreviation": null,
+            "DisplayName": "6mo",
+            "InternalTermId": "6+999999",
+            "PartnerCode": "e80cc647-cef7-4a0e-92d3-c69634d7f7c4",
+            "TermMiles": 999999,
+            "TermMonths": 6
+          },
+          "RegulatedCommissionPerc": 0,
+          "RetailCost": 0,
+          "RetailRegulatedMode": 0,
+          "SavedRateScenarioId": null,
+          "SavedRateSessionId": null,
+          "SavedRateUniqueId": null,
+          "TotalFees": 0,
+          "TotalPremiumAdjustments": 0
+        }
+      ],
+      "RatedVehicleClass": null
+    }
+  ],
+  "TotalSvcTime": "24.9993",
+  "quoteSessionNumber": "80e41086-7bfc-4719-983f-843b8509cbb1",
+  "rateSessionId": ""
+}

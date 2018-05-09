@@ -1,0 +1,20 @@
+{
+  "name": "commerce-draggable-ui",
+  "version": "1.0.0",
+  "description": "A draggable UI for commerce plans/products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass --include-path scss scss/main.scss css/app.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "author": "Marc Zenkner",
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^4.9.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.3"
+  }
+}

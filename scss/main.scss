@@ -1,0 +1,86 @@
+@import 'reset';
+@import 'globals';
+@import 'variables';
+
+body {
+  background-color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-view {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  max-width: 1024px;
+  max-height: 768px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: solid 1px green;
+  background-color: $darkGray;
+  overflow: hidden;
+
+  .active-card-frame {
+    width: 100%;
+    height: 120px;
+    background-color: $lightGray;
+    position: absolute;
+    top: 240px;
+    left: 0px;
+  }
+}
+
+.app-view-column {
+  box-sizing: border-box;
+}
+
+.scroll-area {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+  .scroll-area-column {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .card {
+    display: block;
+    flex-basis: 100%;
+    box-sizing: border-box;
+    height: 120px;
+    max-height: 120px;
+    padding: $padding;
+
+
+    .card-content {
+      background-color: $white;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      padding: calc(1/2 * #{$padding});
+      align-items: center;
+      border-radius: $border-radius;
+
+      &.activeCard{
+        background-color: $main-color-orange;
+      }
+    }
+  }
+}
+
+.info-area {
+  width: 25%;
+  height: 100%;
+  background-color: $white;
+}
+

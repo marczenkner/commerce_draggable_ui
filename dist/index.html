@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link href="/app.d78df8f0.css" type="text/css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="http://knockoutjs.com/downloads/knockout-3.0.0.debug.js" type="text/javascript"></script>
+    <script src="/app.d78df8f0.js"></script></head>
+    <body>
+    <div id="commerceProductApp" class="app-view">
+        <div class="scroll-area app-view-column">
+            
+            <div class="active-card-frame"></div>
+            
+            <div class="scroll-area-column horizontal-draggable">
+                <div class="scroll-wrapper products-wrapper" data-bind="foreach: products">
+                    <div class="card">
+                        <div class="card-content" data-bind="text: DisplayName + InternalProductId">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-area-column horizontal-draggable">
+                <div class="scroll-wrapper cost-wrapper" data-bind="foreach: costs">
+                <div class="card">
+                    <div class="card-content" data-bind="text: '$'+ cost +'.00'">
+                    </div>
+                </div>
+            </div>
+                
+            </div>
+        </div>
+        <div class="info-area app-view-column">
+            <div data-bind="text: activeProduct"></div>
+        </div>
+    </div>
+    <script src="/TweenMax.476719bf.js"></script>
+    <script src="/Draggable.51b9bca6.js"></script>
+    <script src="/ThrowPropsPlugin.1d3b5668.js"></script>
+    <script src="/commerce-draggable-ui.ab8215f8.js"></script>
+    <script src="/viewModel.45392886.js"></script>
+    </body>
+</html>
