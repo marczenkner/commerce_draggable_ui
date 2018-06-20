@@ -1,6 +1,7 @@
 @import 'reset';
 @import 'globals';
 @import 'variables';
+@import 'iconFonts.scss';
 
 body {
   background-color: $white;
@@ -31,11 +32,13 @@ body {
     position: absolute;
     top: 240px;
     left: 0px;
+    opacity: 0.25;
   }
 }
 
 .app-view-column {
   box-sizing: border-box;
+  position: relative;
 }
 
 .scroll-area {
@@ -49,30 +52,93 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-  }
 
-  .card {
-    display: block;
-    flex-basis: 100%;
-    box-sizing: border-box;
-    height: 120px;
-    max-height: 120px;
-    padding: $padding;
-
-
-    .card-content {
-      background-color: $white;
+    .card {
+      display: block;
+      position: relative;
+      flex-basis: 100%;
       box-sizing: border-box;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      padding: calc(1/2 * #{$padding});
-      align-items: center;
-      border-radius: $border-radius;
+      height: 120px;
+      max-height: 120px;
+      min-width: 200px;
+      max-width: 350px;
+      padding: $padding;
+      font-size: $big-text;
 
-      &.activeCard{
-        background-color: $main-color-orange;
+      .card-content {
+        background-color: $white;
+        color: $main-color-blue;
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+        padding: calc(1 / 2 * #{$padding});
+        border-radius: $border-radius;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        @extend %box-shadow;
+
+        div {
+          display: block;
+          width: 100%;
+          text-align: center;
+        }
+
+        &.active-product {
+          background-color: $main-color-blue;
+          color: $white;
+        }
+
+        &.selected-option {
+          border: solid 3px $main-color-blue;
+
+          &:after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 2rem;
+            font-family: 'icons';
+            content: '\e900';
+          }
+        }
+      }
+    }
+
+    &:nth-child(2){
+
+      .card {
+
+        .card-content {
+          position: relative;
+          color: $main-color-orange;
+
+          &.active-product {
+            background-color: $main-color-orange!important;
+            color: $white;
+          }
+
+          &.selected-option {
+            border: solid 3px $main-color-orange;
+
+            &:after {
+              position: absolute;
+              top: 0;
+              right: 0;
+              font-size: 2rem;
+              font-family: 'icons';
+              content: '\e900';
+            }
+          }
+        }
+      }
+    }
+
+    // Column-specific styling
+    .cost-wrapper {
+      .card-content {
+
       }
     }
   }
@@ -82,5 +148,229 @@ body {
   width: 25%;
   height: 100%;
   background-color: $white;
+  position: relative;
+
+  .my-plan {
+    position: absolute;
+    top: 25rem;
+
+    .text {
+      padding: 0 0 1rem 1rem;
+    }
+
+    .super-big-text {
+      color: $main-color-blue;
+    }
+
+    input {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: solid 1px $main-color-blue;
+      border-radius: 5%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem;
+    }
+  }
+}
+
+.add-product {
+  width: 80px;
+  height: 80px;
+  background-color: $main-color-blue;
+  border-radius: 50%;
+  position: absolute;
+  top: 16.2rem;
+  left: $padding;
+  display: flex;
+  justify-content: center;
+  flex-start: center;
+
+  &:after {
+    content: '+';
+    font-family: Nexa-Light;
+    font-size: 5rem;
+    color: #fff;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 1.65rem;
+  }
+}
+
+.hide-drawer {
+  width: 200px;
+  height: 200px;
+  background-color: $main-color-blue;
+  border-radius: 50%;
+  position: absolute;
+  transform: translateX(50%);
+  transition: all $animation-duration;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &:after,
+  &:before {
+    font-family: Nexa-Light;
+    font-size: $big-text;
+    position: absolute;
+    color: $white;
+  }
+
+  &:after {
+    content: 'Hide Plan';
+    flex: 1;
+    text-align: center;
+    opacity: 0;
+    transition: all $animation-duration;
+    top: 4rem;
+  }
+
+  &:before{
+    content: 'Show Plan';
+    width: 4rem;
+    height: 4rem;
+    text-align: right;
+    top: 2rem;
+    left: 1.5rem;
+    opacity: 1;
+    transition: all $animation-duration;
+  }
+}
+
+.hide-drawer-wrapper {
+  width: 12rem;
+  height: 6rem;
+  overflow: hidden;
+  position: absolute;
+  top: -6rem;
+  right: 0;
+  transform: translateX(0%);
+  transition: all $animation-duration;
+}
+
+.selected-products-drawer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $transparency-color;
+  z-index: 99;
+  visibility: hidden;
+  transition: all $animation-duration;
+
+  &.visible {
+    visibility: visible;
+    transition: all $animation-duration;
+  }
+}
+
+.selected-products-drawer {
+  width: 100%;
+  height: 33%;
+  position: absolute;
+  bottom: -35%;
+  left: 0;
+  background-color: $white;
+  @extend %box-shadow;
+  box-sizing: border-box;
+  padding: $padding * 2;
+  transition: all $animation-duration;
+  z-index: 100;
+
+  &.visible {
+    bottom: 0;
+    transition: all $animation-duration;
+
+    .hide-drawer {
+      width: 12rem;
+      height: 12rem;
+      background-color: $main-color-blue;
+      border-radius: 50%;
+      position: absolute;
+      transform: translateX(0);
+      transition: all $animation-duration;
+
+      &:after {
+        opacity: 1;
+        transition: all $animation-duration;
+      }
+
+      &:before{
+        opacity: 0;
+        transition: all $animation-duration;
+      }
+    }
+
+    .hide-drawer-wrapper {
+      transform: translateX(-15%);
+      transition: all $animation-duration;
+    }
+  }
+
+  .selected-products-wrapper {
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    overflow-x: scroll;
+  }
+
+  .selected-products-card {
+    min-height: 100%;
+    flex: 1;
+    min-width: 12rem;
+    max-width: 12rem;
+    border-radius: $border-radius;
+    background-color: $lightGray;
+    padding: $padding;
+    box-sizing: border-box;
+    margin-right: $padding;
+    position: relative;
+  }
+
+  .close-products-card {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: $main-color-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+    &:after {
+      content:	'✕';
+      font-size: 1.2rem;
+      position: absolute;
+      top: 0.45rem;
+      color: $white;
+      font-weight: 700;
+    }
+  }
+
+  .selected-products-card-content {
+
+    div {
+      margin-bottom: 0.5rem;
+    }
+
+    .selected-products-title {
+      color: $main-color-blue;
+
+    }
+  }
 }
 

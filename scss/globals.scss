@@ -1,3 +1,66 @@
-html {
-  font-size: 16px;
+@import 'variables';
+
+// Fonts and text styles
+@font-face {
+  font-family: 'Nexa-Light';
+  src: url("./assets/fonts/25B52E_E_0.eot");
+  src: url("./assets/fonts/25B52E_E_0.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/25B52E_E_0.woff") format("woff"), url("./assets/fonts/25B52E_E_0.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: 'Nexa-Regular';
+  src: url("./assets/fonts/25B52E_C_0.eot");
+  src: url("./assets/fonts/25B52E_C_0.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/25B52E_C_0.woff") format("woff"), url("./assets/fonts/25B52E_C_0.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Nexa-Bold';
+  src: url("./assets/fonts/25B52E_B_0.eot");
+  src: url("./assets/fonts/25B52E_B_0.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/25B52E_B_0.woff") format("woff"), url("./assets/fonts/25B52E_B_0.ttf") format("truetype");
+}
+
+// Basic html element styles
+html {
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+  line-height: 18px;
+  font-family: 'Nexa-Light' !important;
+  font-size: 16px;
+  color: $darkGray;
+}
+
+h1, h2, h3, h4, h5, h6, input {
+  font-family: Nexa-Light;
+  color: $darkGray;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+.big-text {
+  font-size: $big-text;
+}
+
+.super-big-text {
+  font-size: $super-big-text;
+}
+
+.small-text {
+  font-size: $small-text;
+}
+
+.super-small-text {
+  font-size: $super-small-text;
+}
+
+// Extended classes
+%box-shadow {
+  box-shadow: 0 0 15px $transparency-color;
+}
+
+input {
+  font-size: $text;
+}
+

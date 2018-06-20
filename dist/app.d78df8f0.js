@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({11:[function(require,module,exports) {
+})({24:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -138,13 +138,13 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":11}],3:[function(require,module,exports) {
+},{"./bundle-url":24}],3:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":8}],12:[function(require,module,exports) {
+},{"./assets/fonts/25B52E_E_0.eot":13,"./assets/fonts/25B52E_E_0.woff":14,"./assets/fonts/25B52E_E_0.ttf":15,"./assets/fonts/25B52E_C_0.eot":16,"./assets/fonts/25B52E_C_0.woff":17,"./assets/fonts/25B52E_C_0.ttf":18,"./assets/fonts/25B52E_B_0.eot":19,"./assets/fonts/25B52E_B_0.woff":20,"./assets/fonts/25B52E_B_0.ttf":21,"./../assets/icon-fonts/tlc-icons.eot":9,"./../assets/icon-fonts/tlc-icons.woff":10,"./../assets/icon-fonts/tlc-icons.ttf":11,"./../assets/icon-fonts/tlc-icons.svg":12,"_css_loader":8}],25:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -174,7 +174,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56055' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51897' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -313,4 +313,87 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[12])
+},{}],27:[function(require,module,exports) {
+var getBundleURL = require('./bundle-url').getBundleURL;
+
+function loadBundlesLazy(bundles) {
+  if (!Array.isArray(bundles)) {
+    bundles = [bundles];
+  }
+
+  var id = bundles[bundles.length - 1];
+
+  try {
+    return Promise.resolve(require(id));
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND') {
+      return new LazyPromise(function (resolve, reject) {
+        loadBundles(bundles).then(resolve, reject);
+      });
+    }
+
+    throw err;
+  }
+}
+
+function loadBundles(bundles) {
+  var id = bundles[bundles.length - 1];
+
+  return Promise.all(bundles.slice(0, -1).map(loadBundle)).then(function () {
+    return require(id);
+  });
+}
+
+var bundleLoaders = {};
+function registerBundleLoader(type, loader) {
+  bundleLoaders[type] = loader;
+}
+
+module.exports = exports = loadBundlesLazy;
+exports.load = loadBundles;
+exports.register = registerBundleLoader;
+
+var bundles = {};
+function loadBundle(bundle) {
+  var id;
+  if (Array.isArray(bundle)) {
+    id = bundle[1];
+    bundle = bundle[0];
+  }
+
+  if (bundles[bundle]) {
+    return bundles[bundle];
+  }
+
+  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
+  var bundleLoader = bundleLoaders[type];
+  if (bundleLoader) {
+    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
+      if (resolved) {
+        module.bundle.modules[id] = [function (require, module) {
+          module.exports = resolved;
+        }, {}];
+      }
+
+      return resolved;
+    });
+  }
+}
+
+function LazyPromise(executor) {
+  this.executor = executor;
+  this.promise = null;
+}
+
+LazyPromise.prototype.then = function (onSuccess, onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.then(onSuccess, onError);
+};
+
+LazyPromise.prototype.catch = function (onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.catch(onError);
+};
+},{"./bundle-url":24}],0:[function(require,module,exports) {
+var b=require(27);b.load([["25B52E_E_0.5c4ca1ae.eot",13],["25B52E_E_0.06ad1046.woff",14],["25B52E_E_0.724ea5ec.ttf",15],["25B52E_C_0.83df96e0.eot",16],["25B52E_C_0.6feeede7.woff",17],["25B52E_C_0.e8b2dd11.ttf",18],["25B52E_B_0.73b8f45d.eot",19],["25B52E_B_0.ddcca80a.woff",20],["25B52E_B_0.df9df101.ttf",21],["tlc-icons.01005077.eot",9],["tlc-icons.a088b19c.woff",10],["tlc-icons.f3fbe8ed.ttf",11],["tlc-icons.26b6d690.svg",12]]);
+},{}]},{},[25,0])

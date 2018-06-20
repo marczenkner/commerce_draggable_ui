@@ -2,11 +2,24 @@
 $main-color-orange: #ee885a;
 $main-color-blue: #5bcaee;
 $lightGray: #eaeaea;
-$darkGray: #7f7f7f;
+$darkGray: #9d9a9b;
 $white: #fff;
+
+// Transparency vars
+$transparency-color: rgba(0, 0, 0, 0.25);
 
 // Layout Vars
 $padding: 1rem;
 
 // Create our border-radius
 $border-radius: 0.25rem;
+
+// Font Size Variables
+$text: 1rem;
+$big-text: 1.4rem;
+$super-big-text: 1.8rem;
+$small-text: 0.8rem;
+$super-small-text: 0.6rem;
+
+//Other variables
+$animation-duration: 0.5s;
