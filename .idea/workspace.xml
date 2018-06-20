@@ -48,8 +48,8 @@
       <file leaf-file-name="viewModel.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/viewModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="148" column="41" lean-forward="false" selection-start-line="148" selection-start-column="41" selection-end-line="148" selection-end-column="41" />
+            <state relative-caret-position="550">
+              <caret line="52" column="6" lean-forward="true" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -89,7 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>elementChildrenCount</find>
       <find>generateAllI</find>
       <find>ratedTerms</find>
       <find>surcharges</find>
@@ -119,6 +118,7 @@
       <find>nexa</find>
       <find>selected-products-card</find>
       <find>info</find>
+      <find>productDetails</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -372,16 +372,16 @@
       <workItem from="1529001341542" duration="534000" />
       <workItem from="1529335754440" duration="8180000" />
       <workItem from="1529413075521" duration="8993000" />
-      <workItem from="1529498029431" duration="69000" />
+      <workItem from="1529498029431" duration="771000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120272000" />
+    <option name="totallyTimeSpent" value="120974000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="23" width="2506" height="1417" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.115492955" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -390,7 +390,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Quokka" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25660378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25660378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -769,8 +769,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/viewModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="148" column="41" lean-forward="false" selection-start-line="148" selection-start-column="41" selection-end-line="148" selection-end-column="41" />
+        <state relative-caret-position="550">
+          <caret line="52" column="6" lean-forward="true" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
           <folding />
         </state>
       </provider>
