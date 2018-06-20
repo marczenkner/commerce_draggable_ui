@@ -230,19 +230,6 @@ function AppViewModel() {
             callback: self.handleCostWrapperDragged,
             bindingValue: self.activeCostIndex
         }
-        // ,
-        // {
-        //     index: 2,
-        //     domElement: '.miles-wrapper',
-        //     callback: self.handleMilesWrapperDragged,
-        //     bindingValue: self.termMilesIndex
-        // },
-        // {
-        //     index: 3,
-        //     domElement: '.term-wrapper',
-        //     callback: self.handleTermWrapperDragged,
-        //     bindingValue: self.termMonthsIndex
-        // }
     ];
 
     // Makes the selected elements on the DOM draggable
