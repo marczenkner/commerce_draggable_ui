@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({10:[function(require,module,exports) {
+})({41:[function(require,module,exports) {
 
 },{}],37:[function(require,module,exports) {
 
@@ -248,4 +248,4 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[37,10])
+},{}]},{},[37,41])

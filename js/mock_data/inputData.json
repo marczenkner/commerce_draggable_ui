@@ -1,0 +1,28 @@
+{
+  "inputs": [
+    {
+      "index": 0,
+      "value": "vehicleVin",
+      "displayName": "VIN Number",
+      "isRequired": true
+    },
+    {
+      "index": 1,
+      "value": "vehicleVin",
+      "displayName": "VIN Number",
+      "isRequired": true
+    },
+    {
+      "index": 2,
+      "value": "vehicleVin",
+      "displayName": "VIN Number",
+      "isRequired": true
+    },
+    {
+      "index": 3,
+      "value": "vehicleVin",
+      "displayName": "VIN Number",
+      "isRequired": true
+    }
+  ]
+}

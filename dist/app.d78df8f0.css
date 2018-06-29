@@ -88,11 +88,75 @@ h1 {
 .super-small-text {
   font-size: 0.6rem; }
 
+.text-center {
+  text-align: center; }
+
 .scroll-area .scroll-area-column .card .card-content, .selected-products-drawer {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25); }
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0); }
 
 input {
   font-size: 1rem; }
+
+.flex-row {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; }
+
+.flex-column {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap; }
+
+.justify-content-center {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center; }
+
+.align-items-center {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center; }
+
+.max-width-50 {
+  box-sizing: border-box;
+  max-width: 50%;
+  min-width: 50%; }
+
+.padding-left {
+  padding-left: 1rem; }
+
+.padding-right {
+  padding-right: 1rem; }
+
+.padding-top {
+  padding-top: 1rem; }
+
+.padding-bottom {
+  padding-bottom: 1rem; }
+
+.margin-left {
+  margin-left: 1rem; }
+
+.margin-right {
+  margin-right: 1rem; }
+
+.margin-top {
+  margin-top: 1rem; }
+
+.margin-bottom {
+  margin-bottom: 1rem; }
+
+.border-left {
+  border-left: solid 1px #9d9a9b; }
+
+.border-right {
+  border-right: solid 1px #9d9a9b; }
 
 @font-face {
   font-family: 'icons';
@@ -123,24 +187,25 @@ you can use the generic selector below, but it's slower:
   content: "\e900"; }
 
 body {
-  background-color: #fff;
+  background-image: url("road-bg.1f40ef03.jpg");
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center; }
+
+html, body {
+  overflow: hidden; }
 
 .app-view {
   position: relative;
   width: 100%;
   height: 100vh;
-  max-width: 1024px;
-  max-height: 768px;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  border: solid 1px green;
-  background-color: #9d9a9b;
+  background-color: none;
   overflow: hidden; }
   .app-view .active-card-frame {
     width: 100%;
@@ -153,15 +218,21 @@ body {
 
 .app-view-column {
   box-sizing: border-box;
-  position: relative; }
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+  .app-view-column.products-view {
+    left: 100%; }
+    .app-view-column.products-view .scroll-area .scroll-area-column .card {
+      width: 50%; }
 
 .scroll-area {
-  width: 75%;
   height: 100%;
   display: flex;
   flex-direction: row; }
   .scroll-area .scroll-area-column {
     box-sizing: border-box;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; }
@@ -171,9 +242,7 @@ body {
       flex-basis: 100%;
       box-sizing: border-box;
       height: 120px;
-      max-height: 120px;
       min-width: 200px;
-      max-width: 350px;
       padding: 1rem;
       font-size: 1.4rem; }
       .scroll-area .scroll-area-column .card .card-content {
@@ -221,6 +290,81 @@ body {
           font-family: 'icons';
           content: '\e900'; }
 
+.app-view-column.input-view .scroll-area-column .card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.5s; }
+  .app-view-column.input-view .scroll-area-column .card:nth-last-child(1) .card-content {
+    padding: 0; }
+  .app-view-column.input-view .scroll-area-column .card .card-content {
+    width: 50%;
+    max-width: 50%;
+    padding: 0.5rem;
+    position: relative; }
+    .app-view-column.input-view .scroll-area-column .card .card-content input {
+      width: 100%;
+      height: 100%;
+      display: block;
+      padding: 1rem;
+      font-family: "Nexa Light";
+      font-size: 1.8rem; }
+    .app-view-column.input-view .scroll-area-column .card .card-content button {
+      width: 100%;
+      height: 100%;
+      background-color: #ee885a;
+      font-family: "Nexa Light";
+      font-size: 1.8rem;
+      color: #fff;
+      -webkit-appearance: none; }
+  .app-view-column.input-view .scroll-area-column .card .input-label {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    transition: all 0.5s; }
+  .app-view-column.input-view .scroll-area-column .card.is-current {
+    opacity: 1;
+    transition: all 0.5s; }
+    .app-view-column.input-view .scroll-area-column .card.is-current .input-label {
+      top: -30px;
+      left: 10px;
+      font-size: 1.4rem;
+      transition: all 0.5s; }
+
+.app-view-column .input-button {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .app-view-column .input-button .button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: #5bcaee;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .app-view-column .input-button .button:after {
+      content: '<';
+      position: absolute;
+      transform: rotateZ(90deg);
+      font-size: 2rem;
+      color: #fff; }
+  .app-view-column .input-button.forward .button:after {
+    transform: rotateZ(270deg); }
+
+.app-view-column .inputs-wrapper {
+  transition: all 0.5s;
+  top: 0; }
+
 .info-area {
   width: 25%;
   height: 100%;
@@ -228,10 +372,13 @@ body {
   position: relative; }
   .info-area .my-plan {
     position: absolute;
-    top: 25rem; }
+    top: 23rem;
+    width: 100%; }
     .info-area .my-plan .text {
-      padding: 0 0 1rem 1rem; }
-    .info-area .my-plan .super-big-text {
+      padding: 1rem; }
+    .info-area .my-plan .super-big-text,
+    .info-area .my-plan .big-text,
+    .info-area .my-plan .small-text {
       color: #5bcaee; }
     .info-area .my-plan input {
       width: 2.5rem;
@@ -242,7 +389,8 @@ body {
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      padding: 0.5rem; }
+      padding: 0.5rem;
+      margin: 0 auto; }
 
 .add-product {
   width: 80px;

@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({24:[function(require,module,exports) {
+})({36:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -107,7 +107,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],8:[function(require,module,exports) {
+},{}],19:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -138,13 +138,13 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":24}],3:[function(require,module,exports) {
+},{"./bundle-url":36}],11:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"./assets/fonts/25B52E_E_0.eot":13,"./assets/fonts/25B52E_E_0.woff":14,"./assets/fonts/25B52E_E_0.ttf":15,"./assets/fonts/25B52E_C_0.eot":16,"./assets/fonts/25B52E_C_0.woff":17,"./assets/fonts/25B52E_C_0.ttf":18,"./assets/fonts/25B52E_B_0.eot":19,"./assets/fonts/25B52E_B_0.woff":20,"./assets/fonts/25B52E_B_0.ttf":21,"./../assets/icon-fonts/tlc-icons.eot":9,"./../assets/icon-fonts/tlc-icons.woff":10,"./../assets/icon-fonts/tlc-icons.ttf":11,"./../assets/icon-fonts/tlc-icons.svg":12,"_css_loader":8}],25:[function(require,module,exports) {
+},{"./assets/fonts/25B52E_E_0.eot":25,"./assets/fonts/25B52E_E_0.woff":26,"./assets/fonts/25B52E_E_0.ttf":27,"./assets/fonts/25B52E_C_0.eot":28,"./assets/fonts/25B52E_C_0.woff":29,"./assets/fonts/25B52E_C_0.ttf":30,"./assets/fonts/25B52E_B_0.eot":31,"./assets/fonts/25B52E_B_0.woff":32,"./assets/fonts/25B52E_B_0.ttf":33,"./../assets/icon-fonts/tlc-icons.eot":20,"./../assets/icon-fonts/tlc-icons.woff":21,"./../assets/icon-fonts/tlc-icons.ttf":22,"./../assets/icon-fonts/tlc-icons.svg":23,"./../assets/images/road-bg.jpg":24,"_css_loader":19}],37:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -174,7 +174,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51897' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54743' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -313,7 +313,7 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}],27:[function(require,module,exports) {
+},{}],39:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -394,6 +394,6 @@ LazyPromise.prototype.catch = function (onError) {
   if (this.promise === null) this.promise = new Promise(this.executor);
   return this.promise.catch(onError);
 };
-},{"./bundle-url":24}],0:[function(require,module,exports) {
-var b=require(27);b.load([["25B52E_E_0.5c4ca1ae.eot",13],["25B52E_E_0.06ad1046.woff",14],["25B52E_E_0.724ea5ec.ttf",15],["25B52E_C_0.83df96e0.eot",16],["25B52E_C_0.6feeede7.woff",17],["25B52E_C_0.e8b2dd11.ttf",18],["25B52E_B_0.73b8f45d.eot",19],["25B52E_B_0.ddcca80a.woff",20],["25B52E_B_0.df9df101.ttf",21],["tlc-icons.01005077.eot",9],["tlc-icons.a088b19c.woff",10],["tlc-icons.f3fbe8ed.ttf",11],["tlc-icons.26b6d690.svg",12]]);
-},{}]},{},[25,0])
+},{"./bundle-url":36}],0:[function(require,module,exports) {
+var b=require(39);b.load([["25B52E_E_0.5c4ca1ae.eot",25],["25B52E_E_0.06ad1046.woff",26],["25B52E_E_0.724ea5ec.ttf",27],["25B52E_C_0.83df96e0.eot",28],["25B52E_C_0.6feeede7.woff",29],["25B52E_C_0.e8b2dd11.ttf",30],["25B52E_B_0.73b8f45d.eot",31],["25B52E_B_0.ddcca80a.woff",32],["25B52E_B_0.df9df101.ttf",33],["tlc-icons.01005077.eot",20],["tlc-icons.a088b19c.woff",21],["tlc-icons.f3fbe8ed.ttf",22],["tlc-icons.26b6d690.svg",23],["road-bg.1f40ef03.jpg",24]]);
+},{}]},{},[37,0])

@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({22:[function(require,module,exports) {
+})({34:[function(require,module,exports) {
 var global = (1,eval)("this");
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -2130,7 +2130,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	_tickerActive = false; //ensures that the first official animation forces a ticker.tick() to update the time when it is instantiated
 })(typeof module !== "undefined" && module.exports && typeof global !== "undefined" ? global : this || window, "TweenLite");
-},{}],7:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 var global = (1,eval)("this");
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -2911,7 +2911,7 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 		define(["TweenLite"], getGlobal);
 	}
 })("ThrowPropsPlugin");
-},{"../TweenLite.js":22}],25:[function(require,module,exports) {
+},{"../TweenLite.js":34}],37:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -2941,7 +2941,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51897' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54743' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -3080,5 +3080,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[25,7])
+},{}]},{},[37,16])
 //# sourceMappingURL=/ThrowPropsPlugin.1d3b5668.map

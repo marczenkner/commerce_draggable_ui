@@ -1,4 +1,13 @@
 function AppViewModel() {
+
+    var values = {};
+
+    values.getProductsByVinURL = 'https://tlcsvcapi.uat.taillight.xyz/RSS.SPAN.BusinessServices/restvehicleproductsvc.svc/RetrieveVehicleProductsByVIN';
+
+    values.authToken = 'eyJ0eXAiOiJVU0VSQUNDT1VOVCIsImFsZyI6Mn0.eyJqdGkiOiI5OTZlMmE0MC1hODVmLTQ2YzktYTQ0ZS1kNjU4NGJjYjAyMjQiLCJzdWIiOiI1NjIwZmQxZmMyNTcxNzFmZWMxOWYzMjY7ZWFzeWNhcmVhZG1pbjs1NjE2YTU5ZDQ5M2ZiNzFiZGMxNDkyYTUiLCJhdWQiOiJyaXN0a2VuLmNvbSIsIm5iZiI6IjE1MjAzNjk5NDgiLCJleHAiOiIxNTIwNDU2MzQ4IiwiQ2xhaW1zIjpbeyJLZXkiOiJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiLCJWYWx1ZSI6IlNQQU4gQURNSU4ifV19.okOG2OGJCmCDkOU1l3kRdCGnnsNqaAGrJyS4VN7YBH4=';
+
+    values.bodyData = JSON.stringify({"dateOfSale":"2018-03-06","dealerAccountCode":"014996","makeModelInfo":null,"partnerSpecificEligibility":[{"key":"dealSaleType","value":"RetailFinanced"}],"productPlanType":null,"providerCode":"EASYCARE","vehicleCertification":"None","vehicleIdentificationNumber":"1FT7W2B69GEA00053","vehicleInservice":null,"vehicleOdometer":"1000","vehicleUsageTypes":["Personal"],"quoteSessionNumber":"94763b6d-5429-4c2f-9876-55a46821b9e7","productCodeFilters":null});
+
     var self = this;
 
     // The starting position of the app - This sets how many 'cards' from the top the 'focus' section is plus a 'cardHeight' in Pixels
@@ -6,8 +15,10 @@ function AppViewModel() {
     self.cardHeight = 120;
     self.showSelectedProductsDrawer = ko.observable(false);
 
+    // Local variable for our animation duration
     var duration = 0.25;
 
+    // Temp Loan term var
     self.loanTerm = ko.observable(48);
 
     // Boolean value that decides if the user is searching by price, or by term and miles
@@ -16,36 +27,29 @@ function AppViewModel() {
     // Boolean to stop certain user events if draggable or throw is happening
     self.isDragging = ko.observable(false);
 
-    // This is where we cache all the product details for our quote
-    self.productDetails = ko.observableArray();
-
-    self.products = ko.observableArray();
-    self.activeProductIndex = ko.observable();
-    self.activeProduct = ko.observable();
-
-    self.costs = ko.observableArray();
-    self.activeCostIndex = ko.observable();
-    self.activeCost = ko.observable();
-
-    self.coverages = ko.observableArray();
-    self.coveragesIndex = ko.observable();
-
-    self.deductibles = ko.observableArray();
-    self.deductiblesIndex = ko.observable();
-
-    self.termMiles = ko.observableArray();
-    self.termMilesIndex = ko.observable();
-    self.activeTermMiles = ko.observable();
-
-    self.termMonths = ko.observableArray();
-    self.termMonthsIndex = ko.observable();
-    self.activeTermMonths = ko.observable();
-
-    self.selectedOptions = ko.observableArray();
-
     //Array that we use to store our draggables in so that we can garbage collect later
     self.allDraggables = [];
 
+    // This array is our main source of Data for the app
+    self.productsWithDetails = ko.observableArray();
+
+    // Vars for setting the indexes
+    self.activeProductIndex = ko.observable(self.defaultIndex);
+    self.activeProductRates = ko.observableArray();
+    self.activeRateIndex = ko.observable(self.defaultIndex);
+    self.activeInputIndex = ko.observable(0);
+
+    // Vars for display Coverages and Deductibles and other information
+    self.activeCoverage = ko.observable();
+    self.activeDeductible = ko.observable();
+
+    self.vehicleDetails = ko.observable();
+
+    self.planCost = ko.observable(0);
+    self.productCount = ko.observable(0);
+    self.monthlyCost = ko.computed(function(){
+        return (self.planCost() / self.loanTerm()).toFixed(2)
+    });
 
     /*
      *
@@ -55,160 +59,85 @@ function AppViewModel() {
     // Handle completion of products dragged
     self.handleProductsWrapperDragged = function(returnedValue){
 
-        //Remove our original 'costs' drggable from the DOM, as its contents will have changed. Create a new one
-        var notProductColumns = [];
-        $.each(self.columnData, function(index){
-            self.columnData[index].domElement != '.products-wrapper' ? notProductColumns.push(self.columnData[index]) : null;
-        });
+        //Remove our original 'costs' draggable from the DOM, as its contents will have changed. Create a new one
+        self.allDraggables.pop();
 
-        // For each column that is not the '.products-wrapper' we need to remove them from the DOM, and create new draggables with the udpated content
-        $.each(notProductColumns, function(index){
+        // Update our activeProductRates Array with our new rates
+        self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedTerms);
 
-            // First assign a class selector for each one
-            var draggableElementString = notProductColumns[index].domElement,
-                draggableElement = $(draggableElementString),
-                elementChildrenCount = $(draggableElement).children().length;
+        // And create a new draggable based on the updated contents of the dom element
+        self.makeCardsDraggable($(self.columnData[1].domElement), self.columnData[1].callback, self.columnData[1].bindingValue);
 
-            // The remove each from the draggables Array
-            $.each(self.allDraggables, function(index){
-                if (self.allDraggables[index][0].target.classList.contains(draggableElementString)){
-                    self.allDraggables.splice(index, 1);
-                }
+        // And update our coverage and deductible vars
+        self.activeCoverage(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedCoverage.DisplayName);
+        self.activeDeductible(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedDeductible.DisplayName);
+
+        // Get the length of our updated list of rates
+        var elementChildrenCount = self.activeProductRates().length,
+            draggableElement = $(self.columnData[1].domElement);
+
+        //If our rates list is less than the top offset of the focus row, animate it to that position.
+        if(elementChildrenCount < (self.defaultIndex + 1)){
+
+            var offsetDifference = (self.defaultIndex) - elementChildrenCount;
+            TweenMax.to(draggableElement, duration, {
+                y: (offsetDifference + 1) * self.cardHeight,
             });
-
-            // And create a new draggable based on the updated contents of the dom element
-            self.makeCardsDraggable($(self.columnData[index+1].domElement), self.columnData[index+1].callback, self.columnData[index+1].bindingValue);
-
-            //If our element list is less than the top offset of the focus row, animate it to that position.
-            if(elementChildrenCount < (self.defaultIndex + 1)){
-                TweenMax.to(draggableElement, duration, {
-                    y: (elementChildrenCount + 1) * self.cardHeight
-                });
-            } else {
-                TweenMax.to(draggableElement, duration, {
-                    y: 0
-                });
-            }
-
-        });
-
-        // Update our activeCost
-        self.activeCost(self.costs()[self.activeCostIndex()].cost);
+        } else {
+            TweenMax.to(draggableElement, duration, {
+                y: 0
+            });
+        }
     };
 
     self.handleCostWrapperDragged = function(returnedValue){
         //Set our activeCost Index
-        self.activeCostIndex(returnedValue);
-        self.activeCost(self.costs()[returnedValue].cost);
+        self.activeRateIndex(returnedValue);
     };
 
-    self.handleMilesWrapperDragged = function(){
-        console.log('Miles wrapper dragged');
+    self.handleInputFilledOut = function(){
+        console.log('One input filled out');
     };
 
-    self.handleTermWrapperDragged = function(){
-        console.log('Term wrapper dragged');
+    self.inputMarginTop = ko.observable(0);
+
+    self.incrementInputIndex = function(data){
+        if( data.index < self.formData.length -1 ) {
+            data.isCurrent(false);
+            self.formData[data.index + 1].isCurrent(true)
+            self.activeInputIndex(data.index + 1);
+            self.inputMarginTop( - (((self.activeInputIndex()) * self.cardHeight) - (self.cardHeight * self.defaultIndex)) );
+        }
+        return
     };
 
-    /*
-    *
-    * Data retrieval and object creation functions
-    *
-    */
-
-    //load products
-    self.loadProducts = function(){
-        $.ajax({url: './mock_data/products.json',
-            success: function(result){
-                        $.each(result.products, function(index){
-                            var productObject = {
-                                isSelected: ko.observable(false),
-                                DisplayName: result.products[index].DisplayName,
-                                InternalProductId: result.products[index].InternalProductId,
-                            };
-                            self.products.push(productObject);
-                            var productId = result.products[index].InternalProductId;
-                            self.createProductDetails(productId, index);
-                        });
-                    },
-            async: false});
+    self.decrementInputIndex = function(data){
+        if( data.index > 0 ) {
+            data.isCurrent(false);
+            self.formData[data.index - 1].isCurrent(true);
+            self.activeInputIndex(data.index - 1);
+            self.inputMarginTop( - (((self.activeInputIndex()) * self.cardHeight) - (self.cardHeight * self.defaultIndex)) );
+        }
+        return
     };
 
-    //load product details into a cached object
-    self.createProductDetails = function(productId, index){
-        $.ajax({url: './mock_data/' + productId + '.json',
-            success: function(result) {
-                var productDetail = {
-                    productIndex: index,
-                    productId: productId,
-                    productValues: result
-                };
-                self.productDetails.push(productDetail);
-            },
-            async: false});
-        console.log(self.productDetails());
-    };
+    // Handles the user tapping the get quote button
+    self.getQuote = function(){
 
-    // Populate our Costs, termMiles and termMonths Arrays - Happens each time the ActiveProduct is changed
-    self.populateValues = function(){
-        self.costs([]);
-        self.termMonths([]);
-        self.termMiles([]);
-        // Loop through our productDetails Object
-        self.productDetails().map(function(product){
-            if (product.productId === self.activeProduct()){
-                var data = product.productValues.Rates[0].RatedTerms;
-                // Then loop through each of the rates available to the selected product
-                $.each(data, function(index){
-                    var optionIsSelected = false;
-                    // Check to see if we have any selected rates for the selected product already
-                    if( self.selectedOptions().length > 0 ){
-                        //Loop through all of our selectedOptions to find a match up for the activeProduct
-                        $.each(self.selectedOptions(), function(optionsIndex){
-                            // Check to make sure the product ids match up
-                            if (self.selectedOptions()[optionsIndex].productId == product.productId ) {
-                                // The find the matching cost from the options
-                                if( self.selectedOptions()[optionsIndex].selectedOptions.cost == data[index].RetailCost ){
-                                    console.log('We have a winner');
-                                    optionIsSelected = true;
-                                }
-                            }
-                        });
-                    }
-                    var RatedTerm = data[index].RatedTerm;
-                    // console.log(RatedTerm);
-                    var details = {
-                        cost: data[index].RetailCost,
-                        miles: RatedTerm.TermMiles.toString().slice(0, -3),
-                        months: RatedTerm.TermMonths,
-                        isSelected: ko.observable(optionIsSelected)
-                    };
-                    // populate our costs
-                    self.costs.push(details);
+        // Load our products
+        self.loadProducts();
+        // Make our cards draggable
+        $.each(self.columnData, function(index){
+            self.makeCardsDraggable($(self.columnData[index].domElement), self.columnData[index].callback, self.columnData[index].bindingValue);
+        });
 
-                    // populate our termMonths
-                    self.termMonths.push(RatedTerm.TermMiles.toString().slice(0, -3));
-
-                    // populate our termMiles
-                    self.termMiles.push(RatedTerm.TermMonths);
-                });
-            }
+        TweenMax.to('.input-view', duration, {
+            left: '-100%'
+        });
+        TweenMax.to('.products-view', duration, {
+            left: 0
         });
     };
-
-
-
-
-    /*
-     *
-     * Observable subscribers
-     *
-     */
-    // Event subscriber for when we update the active product - This happens complete a drag of the products column
-    self.activeProductIndex.subscribe(function(){
-        self.activeProduct(self.products()[self.activeProductIndex()].InternalProductId);
-        self.populateValues();
-    });
 
     /*
      *
@@ -228,15 +157,160 @@ function AppViewModel() {
             index: 1,
             domElement: '.cost-wrapper',
             callback: self.handleCostWrapperDragged,
-            bindingValue: self.activeCostIndex
+            bindingValue: self.activeRateIndex
         }
     ];
 
-    // Makes the selected elements on the DOM draggable
+    self.formData = [
+        {
+            index: 0,
+            inputValue: "vehicleVin",
+            displayName: "VIN Number",
+            isRequired: true,
+            type: "text",
+            callBack: function(){
+                self.loadVehicleDetails(this.value());
+            },
+            value: ko.observable(),
+            isCurrent: ko.observable(true),
+            isComplete: ko.observable(false)
+
+        },
+        {
+            index: 1,
+            inputValue: "purchasePrice",
+            displayName: "Purchase Price",
+            isRequired: true,
+            type: "text",
+            callBack: false,
+            value: ko.observable(),
+            isCurrent: ko.observable(false),
+            isComplete: ko.observable(false)
+
+        },
+        {
+            index: 2,
+            inputValue: "purchaseDate",
+            displayName: "Purchase Date",
+            isRequired: true,
+            type: "text",
+            callBack: false,
+            value: ko.observable(),
+            isCurrent: ko.observable(false),
+            isComplete: ko.observable(false)
+
+        },
+        {
+            index: 3,
+            inputValue: "submit",
+            displayName: "",
+            isRequired: true,
+            type: "button",
+            callBack: function(){
+                self.getQuote();
+            },
+            value: null,
+            isCurrent: ko.observable(false),
+            isComplete: ko.observable(false)
+
+        }
+    ];
+
+
+    /*
+    *
+    * Data retrieval and object creation functions
+    *
+    */
+
+    //Retrieve the vehicle details from the VIN
+    self.loadVehicleDetails = function(VIN){
+
+        console.log(VIN);
+
+        var tempVIN = '3VW2K7AJ0FM30377';
+
+        if(VIN) {
+            var vehicleApi = 'https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/' + VIN + '?format=json';
+
+            $.ajax({url: vehicleApi,
+                success: function(result){
+                    self.vehicleDetails(result.Results);
+                },
+                async: true});
+
+            console.log(self.vehicleDetails());
+        }
+    };
+
+    //load products
+    self.loadProducts = function(){
+        $.ajax({url: './mock_data/products.json',
+            success: function(result){
+                        $.each(result.products, function(index){
+
+                            var productId = result.products[index].InternalProductId;
+
+                            var productDetails = $.ajax({url: './mock_data/' + productId + '.json',
+                                success: function(result) {
+                                    return result
+                                },
+                                async: false});
+
+                            var productObject = {
+                                isSelected: ko.observable(false),
+                                DisplayName: result.products[index].DisplayName,
+                                InternalProductId: productId,
+                                productDetails: productDetails.responseJSON
+                            };
+
+                            // Create an is selected observable for each of our rates
+                            var rates = productObject.productDetails.Rates[0].RatedTerms;
+                            $.each(rates, function(index){
+                                rates[index].isSelected = ko.observable(false);
+                            });
+
+                            self.productsWithDetails.push(productObject);
+                        });
+                    },
+            async: false});
+
+        // Update other data vars
+        self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedTerms);
+        self.activeCoverage(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedCoverage.DisplayName);
+        self.activeDeductible(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedDeductible.DisplayName);
+
+        console.log(self.productsWithDetails());
+
+        $.ajax({
+            url: values.getProductsByVinURL,
+            contentType: 'application/json',
+            type: 'POST',
+            headers: {
+                Authorization: values.authToken
+            },
+            data: values.bodyData,
+            success: function(data){
+                console.log(data);
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    };
+
+
+    //Makes the selected elements on the DOM draggable
     self.makeCardsDraggable = function(draggableElement, callBack, bindingValue){
+
         // Make our draggable columns draggable
         var elementChildren = $(draggableElement).children(),
             elementChildrenCount = $(elementChildren).length;
+
+        // Set all our cards height to the self.cardHeight variable
+        $(elementChildren).css({ height: self.cardHeight + 'px'});
+        // Also set the height of our active-card-frame
+        $('.active-card-frame').css({ height: self.cardHeight + 'px'});
 
         // Generate a list of snap values
         var snapArray = new Array();
@@ -244,10 +318,12 @@ function AppViewModel() {
             snapArray.push( -(i * self.cardHeight));
         }
 
-        //If our element list is less than the top offset of the focus row, animate it to that position.
+        //If our rates list is less than the top offset of the focus row, animate it to that position.
         if(elementChildrenCount < (self.defaultIndex + 1)){
+
+            var offsetDifference = (self.defaultIndex) - elementChildrenCount;
             TweenMax.to(draggableElement, duration, {
-                y: (elementChildrenCount + 1) * self.cardHeight
+                y: (offsetDifference + 1) * self.cardHeight
             });
         } else {
             TweenMax.to(draggableElement, duration, {
@@ -303,11 +379,10 @@ function AppViewModel() {
                     });
                 } else if (i < index - 4 || i > index + 4) {
                     $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.set($(elementChildren[i]).children(), {
-                        transform: 'scale3d(1, 1, 1)'
+                    TweenMax.to($(elementChildren[i]).children(), duration, {
+                        opacity: 0
                     });
                 }
-
             });
         };
 
@@ -359,109 +434,6 @@ function AppViewModel() {
     };
 
 
-
-
-
-    /*
-     *
-     * Handle adding and removing products
-     *
-     */
-
-    // Adds a given current product to your product list
-    self.addProductWithOptions = function(){
-        //Set all of our options isSelected to false
-        $.each(self.costs(), function(index){
-            self.costs()[index].isSelected(false);
-        });
-        // Set the isSelected Observable on the active product and option
-        self.products()[self.activeProductIndex()].isSelected(true);
-        self.costs()[self.activeCostIndex()].isSelected(true);
-        var selectedOption = {
-            productId: self.products()[self.activeProductIndex()].InternalProductId,
-            productName: self.products()[self.activeProductIndex()].DisplayName,
-            productInfo: self.productDetails()[self.activeProductIndex()],
-            selectedOptions: {
-                cost: self.costs()[self.activeCostIndex()].cost
-            }
-        };
-        // The first time we add an option, we need to push it
-        if(self.selectedOptions().length < 1){
-            self.selectedOptions.push(selectedOption);
-        } else {
-            $.each(self.selectedOptions(), function(index){
-                // If the product already exists, remove it from the array
-                if( self.selectedOptions()[index].productId == self.products()[self.activeProductIndex()].InternalProductId){
-                    self.selectedOptions.splice(index, 1);
-                }
-            });
-
-            // Then create a new cost selectedOption object
-            self.selectedOptions.push(selectedOption);
-        }
-    };
-
-    // Removes a selected product from our selectedOptions
-    self.removeProductWithOptions = function(data){
-
-        var productId = data.productId;
-
-        // Look through each of our selectedOptions and by matching the productId to the data.productId remove it from the selectedOptions
-        $.each(self.selectedOptions(), function(index){
-            if(self.selectedOptions()[index].productId === productId){
-                self.selectedOptions().splice(index, 1);
-                // Make the observable observe itself to force a UI update
-                self.selectedOptions(self.selectedOptions());
-                // And remove the same from our termMonths and termMiles arrays
-                self.termMiles.splice(index, 1);
-                self.termMonths.splice(index, 1);
-            }
-        });
-
-        // Unselect the selected product
-        $.each(self.products(), function(index){
-            if(self.products()[index].InternalProductId === productId){
-                self.products()[index].isSelected(false);
-            }
-        });
-    };
-
-    /*
-     *
-     * Computed variables
-     *
-     */
-
-    // ko.computed to gather the total cost of our plan
-    self.planCost = ko.computed(function(){
-        var totalCost = 0;
-
-        $.each(self.selectedOptions(), function(index){
-            totalCost += self.selectedOptions()[index].selectedOptions.cost;
-        });
-
-        return totalCost
-    });
-
-    // ko.computed to get monthly cost of our plan
-    self.monthlyCost = ko.computed(function(){
-        var monthlyCost = 0;
-
-        $.each(self.selectedOptions(), function(index){
-            monthlyCost += (Math.floor(self.selectedOptions()[index].selectedOptions.cost))/Math.floor(self.loanTerm());
-        });
-
-        monthlyCost = monthlyCost.toFixed(2);
-
-        return monthlyCost
-    });
-
-    // ko.computed to get number of products in our plan
-    self.productCount = ko.computed(function(){
-
-        return self.selectedOptions().length
-    });
-
     /*
      *
      * Showing and Hiding options drawer
@@ -471,6 +443,82 @@ function AppViewModel() {
     // Function to show or hide the selected-options-drawer
     self.showHideOptionsDrawer = function(){
         self.showSelectedProductsDrawer(!self.showSelectedProductsDrawer());
+    };
+
+    /*
+     *
+     * adding and remove products with rates
+     *
+     */
+
+    // Add product with rate
+    self.addProductWithRate = function(data){
+
+        // First set our product isSelected observable to true
+        self.productsWithDetails()[self.activeProductIndex()].isSelected(true);
+
+        // Then loop through all of its rates and set all to false...
+        var rates = self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedTerms;
+        $.each(rates, function(index){
+            rates[index].isSelected(false);
+        });
+        // Finally set the rate at the activeRateIndex to true
+        rates[self.activeRateIndex()].isSelected(true);
+        // And updated our Aside observables
+        self.generatePlanCostAndProductCount();
+    };
+
+    // Remove product with rate
+    self.removeProductWithRate = function(index, data){
+        // First set our product isSelected observable to false
+        self.productsWithDetails()[index()].isSelected(false);
+
+        // Then loop through all of its rates and set all to false...
+        var rates = self.productsWithDetails()[index()].productDetails.Rates[0].RatedTerms;
+        $.each(rates, function(index){
+            rates[index].isSelected(false);
+        });
+        // And updated our Aside observables
+        self.generatePlanCostAndProductCount();
+    };
+
+    // Keydown event listener which handles different key events
+    self.listenForKeyDown = function(){
+        $( "#commerceProductApp" ).keydown(function(event) {
+
+            switch ( event.which ){
+
+                // If user taps tab, we focus on next input
+                case 9:
+                    event.preventDefault();
+                    self.incrementInputIndex( self.formData[self.activeInputIndex()] );
+                    break;
+            }
+        });
+    };
+
+
+    /*
+     *
+     * Aside observables calculator
+     *
+     */
+
+    self.generatePlanCostAndProductCount = function(){
+        var totalPlanCost = 0;
+        var productsCount = 0;
+        $.each(self.productsWithDetails(), function(index){
+            if(self.productsWithDetails()[index].isSelected()){
+                productsCount ++;
+                $.each(self.productsWithDetails()[index].productDetails.Rates[0].RatedTerms, function(i){
+                    if(self.productsWithDetails()[index].productDetails.Rates[0].RatedTerms[i].isSelected()){
+                        totalPlanCost += self.productsWithDetails()[index].productDetails.Rates[0].RatedTerms[i].DealerCost;
+                    }
+                });
+            }
+        });
+        self.planCost(totalPlanCost);
+        self.productCount(productsCount);
     };
 
 
@@ -484,12 +532,10 @@ function AppViewModel() {
     self.init = function(){
         // Set the top offset of our active area based on the self.defaultIndex;
         $('.active-card-frame').css({ top: self.defaultIndex * self.cardHeight + 'px' });
-        // Load our products
-        self.loadProducts();
-        // Make our cards draggable
-        $.each(self.columnData, function(index){
-            self.makeCardsDraggable($(self.columnData[index].domElement), self.columnData[index].callback, self.columnData[index].bindingValue);
-        });
+        // Add keydown event listeners to our app
+        self.listenForKeyDown();
+        // Animate the martinTop of our inputs container
+        self.inputMarginTop( - (((self.activeInputIndex()) * self.cardHeight) - (self.cardHeight * self.defaultIndex)) );
     };
 
     // Inits the app once the document is ready
@@ -507,28 +553,34 @@ function AppViewModel() {
      */
 
     return {
-        products: self.products,
-        productDetails: self.productDetails,
-        activeProduct: self.activeProduct,
-        activeProductIndex: self.activeProductIndex,
-        activeCost: self.activeCost,
-        activeCostIndex: self.activeCostIndex,
-        defaultIndex: self.defaultIndex,
-        setActiveProduct: self.setActiveProduct,
-        costs: self.costs,
-        termMiles: self.termMiles,
-        termMonths: self.termMonths,
+        // Input array
+        activeInputIndex: self.activeInputIndex,
+        inputMarginTop: self.inputMarginTop,
+        incrementInputIndex: self.incrementInputIndex,
+        decrementInputIndex: self.decrementInputIndex,
+        getQuote: self.getQuote,
+        vehicleDetails: self.vehicleDetails,
+        formData: self.formData,
+
+        // Products array
         isSearchingByPrice: self.isSearchingByPrice,
-        addProductWithOptions: self.addProductWithOptions,
-        selectedOptions: self.selectedOptions,
-        showSelectedProductsDrawer: self.showSelectedProductsDrawer,
-        showHideOptionsDrawer: self.showHideOptionsDrawer,
-        removeProductWithOptions: self.removeProductWithOptions,
+        productsWithDetails: self.productsWithDetails,
+        activeProductIndex: self.activeProductIndex,
+        activeProductRates: self.activeProductRates,
         isDragging: self.isDragging,
+
+        // Aside vars
         planCost: self.planCost,
         monthlyCost: self.monthlyCost,
         productCount: self.productCount,
-        loanTerm: self.loanTerm
+        loanTerm: self.loanTerm,
+        showHideOptionsDrawer: self.showHideOptionsDrawer,
+        showSelectedProductsDrawer :self.showSelectedProductsDrawer,
+        addProductWithRate: self.addProductWithRate,
+        removeProductWithRate: self.removeProductWithRate,
+        activeCoverage: self.activeCoverage,
+        activeDeductible: self.activeDeductible
+
     };
 }
 

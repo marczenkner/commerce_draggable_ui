@@ -4,25 +4,30 @@
 @import 'iconFonts.scss';
 
 body {
-  background-color: $white;
+  background-image: url('../assets/images/road-bg.jpg');
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+html, body {
+  overflow: hidden;
 }
 
 .app-view {
   position: relative;
   width: 100%;
   height: 100vh;
-  max-width: 1024px;
-  max-height: 768px;
+  //max-width: 1024px;
+  //max-height: 768px;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  border: solid 1px green;
-  background-color: $darkGray;
+  //border: solid 1px green;
+  background-color: none;
   overflow: hidden;
 
   .active-card-frame {
@@ -38,17 +43,33 @@ body {
 
 .app-view-column {
   box-sizing: border-box;
-  position: relative;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  &.products-view {
+    left: 100%;
+
+    .scroll-area {
+
+      .scroll-area-column {
+
+        .card {
+          width: 50%;
+        }
+      }
+    }
+  }
 }
 
 .scroll-area {
-  width: 75%;
   height: 100%;
   display: flex;
   flex-direction: row;
 
   .scroll-area-column {
     box-sizing: border-box;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -59,9 +80,8 @@ body {
       flex-basis: 100%;
       box-sizing: border-box;
       height: 120px;
-      max-height: 120px;
       min-width: 200px;
-      max-width: 350px;
+      //max-width: 350px;
       padding: $padding;
       font-size: $big-text;
 
@@ -144,6 +164,122 @@ body {
   }
 }
 
+.app-view-column {
+
+  &.input-view {
+
+    .scroll-area-column {
+
+      .card {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        opacity: 0;
+        transition: all $animation-duration;
+
+        &:nth-last-child(1){
+
+          .card-content {
+            padding: 0;
+          }
+        }
+
+        .card-content {
+          width: 50%;
+          max-width: 50%;
+          padding: 0.5rem;
+          position: relative;
+
+          input {
+            width: 100%;
+            height: 100%;
+            display: block;
+            padding: 1rem;
+            font-family: "Nexa Light";
+            font-size: $super-big-text;
+          }
+
+          button {
+            width: 100%;
+            height: 100%;
+            background-color: $main-color-orange;
+            font-family: "Nexa Light";
+            font-size: $super-big-text;
+            color: $white;
+            -webkit-appearance: none;
+          }
+        }
+
+        .input-label {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          text-align: left;
+          font-size: $super-big-text;
+          transition: all $animation-duration;
+        }
+
+        &.is-current {
+          opacity: 1;
+          transition: all $animation-duration;
+
+          .input-label {
+            top: -30px;
+            left: 10px;
+            font-size: $big-text;
+            transition: all $animation-duration;
+          }
+        }
+      }
+    }
+  }
+
+  .input-button {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .button {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: $main-color-blue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:after {
+        content: '<';
+        position: absolute;
+        transform: rotateZ(90deg);
+        font-size: 2rem;
+        color: $white;
+      }
+    }
+
+    &.forward {
+
+      .button {
+
+        &:after {
+          transform: rotateZ(270deg);
+        }
+      }
+    }
+  }
+
+  .inputs-wrapper {
+    transition: all $animation-duration;
+    top: 0;
+  }
+}
+
 .info-area {
   width: 25%;
   height: 100%;
@@ -152,13 +288,16 @@ body {
 
   .my-plan {
     position: absolute;
-    top: 25rem;
+    top: 23rem;
+    width: 100%;
 
     .text {
-      padding: 0 0 1rem 1rem;
+      padding: 1rem;
     }
 
-    .super-big-text {
+    .super-big-text,
+    .big-text,
+    .small-text {
       color: $main-color-blue;
     }
 
@@ -172,6 +311,7 @@ body {
       justify-content: center;
       align-items: center;
       padding: 0.5rem;
+      margin: 0 auto;
     }
   }
 }
