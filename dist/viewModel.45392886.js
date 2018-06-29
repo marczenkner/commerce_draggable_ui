@@ -86,7 +86,21 @@ function AppViewModel() {
 
     values.authToken = 'eyJ0eXAiOiJVU0VSQUNDT1VOVCIsImFsZyI6Mn0.eyJqdGkiOiI5OTZlMmE0MC1hODVmLTQ2YzktYTQ0ZS1kNjU4NGJjYjAyMjQiLCJzdWIiOiI1NjIwZmQxZmMyNTcxNzFmZWMxOWYzMjY7ZWFzeWNhcmVhZG1pbjs1NjE2YTU5ZDQ5M2ZiNzFiZGMxNDkyYTUiLCJhdWQiOiJyaXN0a2VuLmNvbSIsIm5iZiI6IjE1MjAzNjk5NDgiLCJleHAiOiIxNTIwNDU2MzQ4IiwiQ2xhaW1zIjpbeyJLZXkiOiJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiLCJWYWx1ZSI6IlNQQU4gQURNSU4ifV19.okOG2OGJCmCDkOU1l3kRdCGnnsNqaAGrJyS4VN7YBH4=';
 
-    values.bodyData = JSON.stringify({ "dateOfSale": "2018-03-06", "dealerAccountCode": "014996", "makeModelInfo": null, "partnerSpecificEligibility": [{ "key": "dealSaleType", "value": "RetailFinanced" }], "productPlanType": null, "providerCode": "EASYCARE", "vehicleCertification": "None", "vehicleIdentificationNumber": "1FT7W2B69GEA00053", "vehicleInservice": null, "vehicleOdometer": "1000", "vehicleUsageTypes": ["Personal"], "quoteSessionNumber": "94763b6d-5429-4c2f-9876-55a46821b9e7", "productCodeFilters": null });
+    values.bodyData = JSON.stringify({
+        dateOfSale: '2018-03-06',
+        dealerAccountCode: '014996',
+        makeModelInfo: null,
+        partnerSpecificEligibility: [{ "key": "dealSaleType", "value": "RetailFinanced" }],
+        productPlanType: null,
+        providerCode: 'EASYCARE',
+        vehicleCertification: 'None',
+        vehicleIdentificationNumber: '1FT7W2B69GEA00053',
+        vehicleInservice: null,
+        vehicleOdometer: '1000',
+        vehicleUsageTypes: ['Personal'],
+        quoteSessionNumber: '94763b6d-5429-4c2f-9876-55a46821b9e7',
+        productCodeFilters: null
+    });
 
     var self = this;
 
@@ -353,6 +367,7 @@ function AppViewModel() {
 
         console.log(self.productsWithDetails());
 
+        // Call to TLC API to retrieve all products for a given VIN
         $.ajax({
             url: values.getProductsByVinURL,
             contentType: 'application/json',
@@ -415,43 +430,60 @@ function AppViewModel() {
             bindingValue(self.defaultIndex);
         }
 
+        // Var to set the number of cards 'above' and 'below' the current card - this is limited to the height of the viewport minus height of each 'card'
+        var animateCardLimits,
+            opacityValue = 1,
+            scaleValue = 1;
+        animateCardLimits = Math.round($(window).height() / self.cardHeight);
+
+        console.log(animateCardLimits);
+
         var animateAllCards = function animateAllCards(children, index) {
             $.each(children, function (i) {
-                if (i === index) {
-                    $(elementChildren[i]).children().addClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 1,
-                        transform: 'scale3d(1, 1, 1)'
-                    });
-                } else if (i === index - 1 || i === index + 1) {
-                    $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0.8,
-                        transform: 'scale3d(0.95, 1, 1)'
-                    });
-                } else if (i === index - 2 || i === index + 2) {
-                    $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0.6,
-                        transform: 'scale3d(0.9, 1, 1)'
-                    });
-                } else if (i === index - 3 || i === index + 3) {
-                    $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0.4,
-                        transform: 'scale3d(0.85, 1, 1)'
-                    });
-                } else if (i === index - 4 || i === index + 4) {
-                    $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0.2,
-                        transform: 'scale3d(0.8, 1, 1)'
-                    });
-                } else if (i < index - 4 || i > index + 4) {
-                    $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0
-                    });
+                // if( i === index ){
+                //     $(elementChildren[i]).children().addClass('active-product');
+                //     TweenMax.to($(elementChildren[i]).children(), duration, {
+                //         opacity: 1,
+                //         transform: 'scale3d(1, 1, 1)'
+                //     });
+                // } else if (i === index - 1 || i === index + 1){
+                //     $(elementChildren[i]).children().removeClass('active-product');
+                //     TweenMax.to($(elementChildren[i]).children(), duration, {
+                //         opacity: 0.9,
+                //         transform: 'scale3d(0.95, 1, 1)'
+                //     });
+                // } else if (i === index - 2 || i === index + 2){
+                //     $(elementChildren[i]).children().removeClass('active-product');
+                //     TweenMax.to($(elementChildren[i]).children(), duration, {
+                //         opacity: 0.8,
+                //         transform: 'scale3d(0.9, 1, 1)'
+                //     });
+                // } else if (i === index - 3 || i === index + 3){
+                //     $(elementChildren[i]).children().removeClass('active-product');
+                //     TweenMax.to($(elementChildren[i]).children(), duration, {
+                //         opacity: 0.7,
+                //         transform: 'scale3d(0.85, 1, 1)'
+                //     });
+                // } else if (i === index - 4 || i === index + 4){
+                //     $(elementChildren[i]).children().removeClass('active-product');
+                //     TweenMax.to($(elementChildren[i]).children(), duration, {
+                //         opacity: 0.6,
+                //         transform: 'scale3d(0.8, 1, 1)'
+                //     });
+                // } else if (i < index - 4 || i > index + 4) {
+                //     $(elementChildren[i]).children().removeClass('active-product');
+                //     TweenMax.to($(elementChildren[i]).children(), duration, {
+                //         opacity: 0
+                //     });
+                // }
+                for (var cardLimitIndex = 0; cardLimitIndex < animateCardLimits; cardLimitIndex++) {
+                    if (i === index) {
+                        $(elementChildren[i]).children().addClass('active-product');
+                        TweenMax.to($(elementChildren[i]).children(), duration, {
+                            opacity: 1,
+                            transform: 'scale3d(1, 1, 1)'
+                        });
+                    }
                 }
             });
         };

@@ -48,8 +48,8 @@
       <file leaf-file-name="viewModel.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/viewModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="275" column="27" lean-forward="true" selection-start-line="275" selection-start-column="27" selection-end-line="276" selection-end-column="0" />
+            <state relative-caret-position="812">
+              <caret line="417" column="21" lean-forward="false" selection-start-line="417" selection-start-column="21" selection-end-line="417" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -271,7 +271,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mock_data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -443,12 +447,12 @@
       <workItem from="1530117811217" duration="7536000" />
       <workItem from="1530186755601" duration="1583000" />
       <workItem from="1530197337923" duration="4459000" />
-      <workItem from="1530285068400" duration="4835000" />
+      <workItem from="1530285068400" duration="7006000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166192000" />
+    <option name="totallyTimeSpent" value="168363000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="23" width="2509" height="1417" extended-state="6" />
@@ -869,8 +873,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/viewModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="275" column="27" lean-forward="true" selection-start-line="275" selection-start-column="27" selection-end-line="276" selection-end-column="0" />
+        <state relative-caret-position="812">
+          <caret line="417" column="21" lean-forward="false" selection-start-line="417" selection-start-column="21" selection-end-line="417" selection-end-column="21" />
           <folding />
         </state>
       </provider>
