@@ -7,7 +7,7 @@
 // orig method which is the require for previous bundles
 
 // eslint-disable-next-line no-global-assign
-parcelRequire = (function (modules, cache, entry) {
+parcelRequire = (function (modules, cache, entry, globalName) {
   // Save the require from previous bundle to this closure if any
   var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
   var nodeRequire = typeof require === 'function' && require;
@@ -45,7 +45,7 @@ parcelRequire = (function (modules, cache, entry) {
 
       var module = cache[name] = new newRequire.Module(name);
 
-      modules[name][0].call(module.exports, localRequire, module, module.exports);
+      modules[name][0].call(module.exports, localRequire, module, module.exports, this);
     }
 
     return cache[name].exports;
@@ -70,43 +70,246 @@ parcelRequire = (function (modules, cache, entry) {
   newRequire.modules = modules;
   newRequire.cache = cache;
   newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [function (require, module) {
+      module.exports = exports;
+    }, {}];
+  };
 
   for (var i = 0; i < entry.length; i++) {
     newRequire(entry[i]);
   }
 
+  if (entry.length) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(entry[entry.length - 1]);
+
+    // CommonJS
+    if (typeof exports === "object" && typeof module !== "undefined") {
+      module.exports = mainExports;
+
+    // RequireJS
+    } else if (typeof define === "function" && define.amd) {
+     define(function () {
+       return mainExports;
+     });
+
+    // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+
   // Override the current require with this new one
   return newRequire;
-})({42:[function(require,module,exports) {
+})({94:[function(require,module,exports) {
+module.exports = {
+    products: {
+        url: 'https://tlcsvcapi.uat.taillight.xyz/RSS.SPAN.BusinessServices/restvehicleproductsvc.svc/RetrieveVehicleProductsByVIN',
+        authToken: 'eyJ0eXAiOiJVU0VSQUNDT1VOVCIsImFsZyI6Mn0.eyJqdGkiOiI5OTZlMmE0MC1hODVmLTQ2YzktYTQ0ZS1kNjU4NGJjYjAyMjQiLCJzdWIiOiI1NjIwZmQxZmMyNTcxNzFmZWMxOWYzMjY7ZWFzeWNhcmVhZG1pbjs1NjE2YTU5ZDQ5M2ZiNzFiZGMxNDkyYTUiLCJhdWQiOiJyaXN0a2VuLmNvbSIsIm5iZiI6IjE1MjAzNjk5NDgiLCJleHAiOiIxNTIwNDU2MzQ4IiwiQ2xhaW1zIjpbeyJLZXkiOiJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiLCJWYWx1ZSI6IlNQQU4gQURNSU4ifV19.okOG2OGJCmCDkOU1l3kRdCGnnsNqaAGrJyS4VN7YBH4=',
+        tempBodyData: {
+            dateOfSale: '2018-03-06',
+            dealerAccountCode: '014996',
+            makeModelInfo: null,
+            partnerSpecificEligibility: [{ "key": "dealSaleType", "value": "RetailFinanced" }],
+            productPlanType: null,
+            providerCode: 'EASYCARE',
+            vehicleCertification: 'None',
+            vehicleIdentificationNumber: '1FT7W2B69GEA00053',
+            vehicleInservice: null,
+            vehicleOdometer: '1000',
+            vehicleUsageTypes: ['Personal'],
+            quoteSessionNumber: '94763b6d-5429-4c2f-9876-55a46821b9e7',
+            productCodeFilters: null
+        }
+    },
+    rates: {
+        url: 'https://tlcsvcapi.uat.taillight.xyz/rss.span.businessservices/restvehicleratesvc.svc/RetrieveVehicleRates',
+        authToken: 'eyJ0eXAiOiJVU0VSQUNDT1VOVCIsImFsZyI6Mn0.eyJqdGkiOiJlNTE4Njk2MC1lYzc2LTRkZjctOTY2YS1iMDY5Y2E0ODY1ZDUiLCJzdWIiOiI1NjIwZmQxZmMyNTcxNzFmZWMxOWYzMjY7ZWFzeWNhcmVhZG1pbjs1NjE2YTU5ZDQ5M2ZiNzFiZGMxNDkyYTUiLCJhdWQiOiJyaXN0a2VuLmNvbSIsIm5iZiI6IjE1MjY2NjYxOTIiLCJleHAiOiIxNTI2NzUyNTkyIiwiQ2xhaW1zIjpbeyJLZXkiOiJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiLCJWYWx1ZSI6IlNQQU4gQURNSU4ifSx7IktleSI6Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSIsIlZhbHVlIjoiUE9SVEFMIEFETUlOIn1dfQ.19WgLXhzHgX6rPiQjRktGRNFZeW6xre71NtN0VJVZgs=',
+        postmanToken: {
+            key: 'Postman-Token',
+            value: 'a9834658-8490-07c0-6f58-ca47bbcb5474'
+        },
+        cacheControl: {
+            key: 'Cache-Control',
+            value: 'no-cache'
+        },
+
+        tempBodyData: {
+            dateOfSale: '2018-05-18',
+            dealerAccountCode: '014996',
+            eligibilitySessionID: null,
+            partnerSpecificEligibility: [],
+            productPlanType: null,
+            productsToRate: [{
+                PartnerSpecificFields: {
+                    FlexFields: [{
+                        FieldName: 'SORTORDER',
+                        FieldType: 2,
+                        FieldValue: '2'
+                    }]
+                },
+                ApplicationCode: 'C1032605',
+                BaseNoUpgradeProduct: null,
+                CertificationType: 0,
+                DisplayName: 'EC Select Plus 6 StandAlone 2014 (US):2605',
+                InternalProductId: 'C1032605',
+                InternalProductVersionId: null,
+                InternalRatingProgramId: null,
+                IsDealerException: false,
+                IsInserviceRequired: false,
+                IsNewCoverage: false,
+                IsVehicleFinancialsRequired: false,
+                IsWrapCoverage: false,
+                ParentProductType: {
+                    PartnerSpecificFields: {
+                        FlexFields: []
+                    },
+                    ApplicationCode: 'ECSP',
+                    ApplicationSubCode: null,
+                    DisplayName: null,
+                    InternalProductTypeId: null,
+                    ParentProductRatingCategory: {
+                        PartnerSpecificFields: {
+                            FlexFields: [{
+                                FieldName: 'COMMERCE-RATE-TYPE',
+                                FieldType: 2,
+                                FieldValue: 'ECSP'
+                            }]
+                        },
+                        Abbreviation: 'ECSP',
+                        ApplicationCode: 'ECSP',
+                        DisplayName: null
+                    },
+                    PartnerCode: 'ECSP',
+                    ProfitSettingCategoryName: null,
+                    SettingDependentSubCode: null,
+                    UpgradesInternalProductTypeId: null
+                },
+                PartnerCode: 'C1032605',
+                ProductCoverages: [{
+                    CoverageDeductibles: [{
+                        ProductDeductible: {
+                            PartnerSpecificFields: {
+                                FlexFields: []
+                            },
+                            Abbreviation: '000',
+                            DisplayName: '0.00',
+                            InternalDeductibleId: '0.00',
+                            NumericValue: 0,
+                            PartnerCode: '0.00'
+                        }
+                    }],
+                    ProductCoverage: {
+                        PartnerSpecificFields: {
+                            FlexFields: []
+                        },
+                        Abbreviation: 'T.SelectPlus',
+                        Description: 'SelectPlus Time only',
+                        DisplayName: 'SelectPlus: Time only',
+                        InternalCoverageId: 'T.SelectPlus',
+                        IsLWBaseCoverage: false,
+                        NumericValue: 0,
+                        PartnerCode: 'T.SelectPlus'
+                    },
+                    ProductTerms: null
+                }],
+                ProductOptions: [],
+                RateCalculationMethod: 0,
+                SortOrder: '2',
+                UpgradeProducts: null
+            }],
+            providerCode: 'EASYCARE',
+            vehicleCertification: 'None',
+            vehicleFinancials: {
+                AmountFinanced: 0,
+                DMSDealNumber: '',
+                DaysToFirstPayment: 0,
+                FinancedAPR: 0,
+                FinancedTermMonths: 0,
+                FirstPaymentDate: '',
+                LenderAddress1: null,
+                LenderAddress2: null,
+                LenderCity: null,
+                LenderCode: null,
+                LenderEmail: null,
+                LenderName: null,
+                LenderPhone: null,
+                LenderState: null,
+                LenderZip: null,
+                MSRP: 0,
+                MoneyFactor: 0,
+                PurchasePrice: 0,
+                StockNumber: '',
+                VehicleSaleType: 'RetailFinanced'
+            },
+            vehicleInservice: null,
+            vehicleOdometer: '2500',
+            vehicleToRate: {
+                InternalMakeId: 'FORD',
+                InternalModelId: '1FT7W2B69G',
+                MakeName: '',
+                ModelName: null,
+                ModelYear: 2016,
+                VehicleIdentification: '1FT7W2B69GEA00053'
+            },
+            vehicleUsageTypes: ['Personal'],
+            quoteSessionNumber: 'd219be83-c5d8-4fcd-9dc7-f0c36c8fa409'
+        }
+    }
+};
+},{}],95:[function(require,module,exports) {
+module.exports = {
+    getProducts: function getProducts(path, method, contentType, authorization, bodyData) {
+        // console.log(bodyData.vehicleIdentificationNumber);
+        return new Promise(function (resolve, reject) {
+            fetch(path, {
+                headers: {
+                    'content-type': contentType,
+                    'Authorization': authorization
+                },
+                body: JSON.stringify(bodyData),
+                method: method
+
+            }).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                resolve(data);
+            });
+        });
+    },
+    getRatesForProduct: function getRatesForProduct(path, method, contentType, authorization, cacheControl, postmanToken, bodyData, productId) {
+        // console.log('getRatesForProduct called with id ' + productId);
+        return new Promise(function (resolve, reject) {
+            fetch(path, {
+                headers: {
+                    'content-type': contentType,
+                    'Authorization': authorization,
+                    'Cache-Control': cacheControl
+                    // 'Postman-Token': postmanToken
+                },
+                body: JSON.stringify(bodyData),
+                method: method
+            }).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                resolve(data);
+            });
+        });
+    }
+};
+},{}],8:[function(require,module,exports) {
+var config = require('./config.js');
+var dataService = require('./fetchData.js');
+
 function AppViewModel() {
-
-    var values = {};
-
-    values.getProductsByVinURL = 'https://tlcsvcapi.uat.taillight.xyz/RSS.SPAN.BusinessServices/restvehicleproductsvc.svc/RetrieveVehicleProductsByVIN';
-
-    values.authToken = 'eyJ0eXAiOiJVU0VSQUNDT1VOVCIsImFsZyI6Mn0.eyJqdGkiOiI5OTZlMmE0MC1hODVmLTQ2YzktYTQ0ZS1kNjU4NGJjYjAyMjQiLCJzdWIiOiI1NjIwZmQxZmMyNTcxNzFmZWMxOWYzMjY7ZWFzeWNhcmVhZG1pbjs1NjE2YTU5ZDQ5M2ZiNzFiZGMxNDkyYTUiLCJhdWQiOiJyaXN0a2VuLmNvbSIsIm5iZiI6IjE1MjAzNjk5NDgiLCJleHAiOiIxNTIwNDU2MzQ4IiwiQ2xhaW1zIjpbeyJLZXkiOiJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiLCJWYWx1ZSI6IlNQQU4gQURNSU4ifV19.okOG2OGJCmCDkOU1l3kRdCGnnsNqaAGrJyS4VN7YBH4=';
-
-    values.bodyData = JSON.stringify({
-        dateOfSale: '2018-03-06',
-        dealerAccountCode: '014996',
-        makeModelInfo: null,
-        partnerSpecificEligibility: [{ "key": "dealSaleType", "value": "RetailFinanced" }],
-        productPlanType: null,
-        providerCode: 'EASYCARE',
-        vehicleCertification: 'None',
-        vehicleIdentificationNumber: '1FT7W2B69GEA00053',
-        vehicleInservice: null,
-        vehicleOdometer: '1000',
-        vehicleUsageTypes: ['Personal'],
-        quoteSessionNumber: '94763b6d-5429-4c2f-9876-55a46821b9e7',
-        productCodeFilters: null
-    });
 
     var self = this;
 
     // The starting position of the app - This sets how many 'cards' from the top the 'focus' section is plus a 'cardHeight' in Pixels
     self.defaultIndex = 2;
-    self.cardHeight = 120;
+    self.cardHeight = 180;
     self.showSelectedProductsDrawer = ko.observable(false);
 
     // Local variable for our animation duration
@@ -145,6 +348,10 @@ function AppViewModel() {
         return (self.planCost() / self.loanTerm()).toFixed(2);
     });
 
+    // Error message and busy page vars
+    self.errorMessage = ko.observable('');
+    self.pageBusy = ko.observable(false);
+
     /*
      *
      *  Event handler callbacks that get triggered once a column on the UI completes its 'drag'
@@ -157,14 +364,14 @@ function AppViewModel() {
         self.allDraggables.pop();
 
         // Update our activeProductRates Array with our new rates
-        self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedTerms);
+        self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].Rates);
 
         // And create a new draggable based on the updated contents of the dom element
         self.makeCardsDraggable($(self.columnData[1].domElement), self.columnData[1].callback, self.columnData[1].bindingValue);
 
         // And update our coverage and deductible vars
-        self.activeCoverage(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedCoverage.DisplayName);
-        self.activeDeductible(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedDeductible.DisplayName);
+        // self.activeCoverage(self.productsWithDetails()[self.activeProductIndex()].Rates[0].RatedCoverage.DisplayName);
+        // self.activeDeductible(self.productsWithDetails()[self.activeProductIndex()].Rates[0].RatedDeductible.DisplayName);
 
         // Get the length of our updated list of rates
         var elementChildrenCount = self.activeProductRates().length,
@@ -213,24 +420,6 @@ function AppViewModel() {
             self.inputMarginTop(-(self.activeInputIndex() * self.cardHeight - self.cardHeight * self.defaultIndex));
         }
         return;
-    };
-
-    // Handles the user tapping the get quote button
-    self.getQuote = function () {
-
-        // Load our products
-        self.loadProducts();
-        // Make our cards draggable
-        $.each(self.columnData, function (index) {
-            self.makeCardsDraggable($(self.columnData[index].domElement), self.columnData[index].callback, self.columnData[index].bindingValue);
-        });
-
-        TweenMax.to('.input-view', duration, {
-            left: '-100%'
-        });
-        TweenMax.to('.products-view', duration, {
-            left: 0
-        });
     };
 
     /*
@@ -294,7 +483,7 @@ function AppViewModel() {
         isRequired: true,
         type: "button",
         callBack: function callBack() {
-            self.getQuote();
+            self.getProductsForVin(self.formData[0].value());
         },
         value: null,
         isCurrent: ko.observable(false),
@@ -324,64 +513,88 @@ function AppViewModel() {
                 },
                 async: true });
 
-            console.log(self.vehicleDetails());
+            // console.log(self.vehicleDetails());
         }
     };
 
-    //load products
-    self.loadProducts = function () {
-        $.ajax({ url: './mock_data/products.json',
-            success: function success(result) {
-                $.each(result.products, function (index) {
+    // Gets all products for our VIN
+    self.getProductsForVin = function (VIN) {
 
-                    var productId = result.products[index].InternalProductId;
+        // Set our pageBusy UI Var
+        self.pageBusy(true);
 
-                    var productDetails = $.ajax({ url: './mock_data/' + productId + '.json',
-                        success: function success(result) {
-                            return result;
-                        },
-                        async: false });
+        // Empty our product object first
+        self.productsWithDetails([]);
 
-                    var productObject = {
-                        isSelected: ko.observable(false),
-                        DisplayName: result.products[index].DisplayName,
-                        InternalProductId: productId,
-                        productDetails: productDetails.responseJSON
-                    };
+        // Define the values we need to get products for our vin
+        var path = config.products.url;
+        var method = 'POST';
+        var contentType = 'application/json';
+        var authorization = config.products.authToken;
+        var bodyData = config.products.tempBodyData;
 
-                    // Create an is selected observable for each of our rates
-                    var rates = productObject.productDetails.Rates[0].RatedTerms;
-                    $.each(rates, function (index) {
-                        rates[index].isSelected = ko.observable(false);
+        // If we have a VIN from the UI, use this one instead - mock data object has a hard-coded vin as a fallback
+        if (VIN) {
+            bodyData.vehicleIdentificationNumber = VIN;
+        }
+
+        // Make a call to our getProducts method
+        dataService.getProducts(path, method, contentType, authorization, bodyData).then(function (data) {
+
+            $.each(data.Products, function (index) {
+                data.Products[index].isSelected = ko.observable(false);
+                data.Products[index].Rates = [];
+
+                // Define the values we need to get rates for our products
+                var path = config.rates.url;
+                var method = 'POST';
+                var contentType = 'application/json';
+                var authorization = config.rates.authToken;
+                var bodyData = config.rates.tempBodyData;
+
+                bodyData.productsToRate[0].InternalProductId = data.Products[index].InternalProductId;
+                bodyData.productsToRate[0].ApplicationCode = data.Products[index].InternalProductId;
+
+                var cacheControl = 'no-cache';
+                var postmanToken = 'a9834658-8490-07c0-6f58-ca47bbcb5474';
+
+                // Call our getRatesForProduct method once for each product
+                dataService.getRatesForProduct(path, method, contentType, authorization, cacheControl, postmanToken, bodyData, data.Products[index].InternalProductId).then(function (rates) {
+                    //console.log(rates);
+                    // Add an isSelected observable to each of our rates
+                    $.each(rates.Rates[0].RatedTerms, function (i) {
+                        rates.Rates[0].RatedTerms[i].isSelected = ko.observable(false);
+                        data.Products[index].Rates.push(rates.Rates[0].RatedTerms[i]);
                     });
-
-                    self.productsWithDetails.push(productObject);
+                    //console.log(data.Products[index]);
                 });
-            },
-            async: false });
 
-        // Update other data vars
-        self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedTerms);
-        self.activeCoverage(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedCoverage.DisplayName);
-        self.activeDeductible(self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedDeductible.DisplayName);
+                // Update our observable array with the data
+                self.productsWithDetails.push(data.Products[index]);
+            });
+
+            // // Update other data vars
+            self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].Rates);
+            // self.activeCoverage(self.productsWithDetails()[self.activeProductIndex()].Rates[0].RatedCoverage.DisplayName);
+            // self.activeDeductible(self.productsWithDetails()[self.activeProductIndex()].Rates[0].RatedDeductible.DisplayName);
+
+            // Make our cards draggable
+            $.each(self.columnData, function (index) {
+                self.makeCardsDraggable($(self.columnData[index].domElement), self.columnData[index].callback, self.columnData[index].bindingValue);
+            });
+
+            // Turn off our pageBusy var
+            self.pageBusy(false);
+        });
 
         console.log(self.productsWithDetails());
 
-        // Call to TLC API to retrieve all products for a given VIN
-        $.ajax({
-            url: values.getProductsByVinURL,
-            contentType: 'application/json',
-            type: 'POST',
-            headers: {
-                Authorization: values.authToken
-            },
-            data: values.bodyData,
-            success: function success(data) {
-                console.log(data);
-            },
-            error: function error(_error) {
-                console.log(_error);
-            }
+        // Animated our views so that we go to scroll view.
+        TweenMax.to('.input-view', duration, {
+            left: '-100%'
+        });
+        TweenMax.to('.products-view', duration, {
+            left: 0
         });
     };
 
@@ -431,59 +644,50 @@ function AppViewModel() {
         }
 
         // Var to set the number of cards 'above' and 'below' the current card - this is limited to the height of the viewport minus height of each 'card'
-        var animateCardLimits,
-            opacityValue = 1,
-            scaleValue = 1;
-        animateCardLimits = Math.round($(window).height() / self.cardHeight);
+        var animateCardLimits = Math.round($(window).height() / self.cardHeight),
+            animateCardIndex = animateCardLimits;
 
-        console.log(animateCardLimits);
+        animateCardLimits = animateCardLimits.toFixed(2);
 
         var animateAllCards = function animateAllCards(children, index) {
+
             $.each(children, function (i) {
-                // if( i === index ){
-                //     $(elementChildren[i]).children().addClass('active-product');
-                //     TweenMax.to($(elementChildren[i]).children(), duration, {
-                //         opacity: 1,
-                //         transform: 'scale3d(1, 1, 1)'
-                //     });
-                // } else if (i === index - 1 || i === index + 1){
-                //     $(elementChildren[i]).children().removeClass('active-product');
-                //     TweenMax.to($(elementChildren[i]).children(), duration, {
-                //         opacity: 0.9,
-                //         transform: 'scale3d(0.95, 1, 1)'
-                //     });
-                // } else if (i === index - 2 || i === index + 2){
-                //     $(elementChildren[i]).children().removeClass('active-product');
-                //     TweenMax.to($(elementChildren[i]).children(), duration, {
-                //         opacity: 0.8,
-                //         transform: 'scale3d(0.9, 1, 1)'
-                //     });
-                // } else if (i === index - 3 || i === index + 3){
-                //     $(elementChildren[i]).children().removeClass('active-product');
-                //     TweenMax.to($(elementChildren[i]).children(), duration, {
-                //         opacity: 0.7,
-                //         transform: 'scale3d(0.85, 1, 1)'
-                //     });
-                // } else if (i === index - 4 || i === index + 4){
-                //     $(elementChildren[i]).children().removeClass('active-product');
-                //     TweenMax.to($(elementChildren[i]).children(), duration, {
-                //         opacity: 0.6,
-                //         transform: 'scale3d(0.8, 1, 1)'
-                //     });
-                // } else if (i < index - 4 || i > index + 4) {
-                //     $(elementChildren[i]).children().removeClass('active-product');
-                //     TweenMax.to($(elementChildren[i]).children(), duration, {
-                //         opacity: 0
-                //     });
-                // }
-                for (var cardLimitIndex = 0; cardLimitIndex < animateCardLimits; cardLimitIndex++) {
-                    if (i === index) {
-                        $(elementChildren[i]).children().addClass('active-product');
-                        TweenMax.to($(elementChildren[i]).children(), duration, {
-                            opacity: 1,
-                            transform: 'scale3d(1, 1, 1)'
-                        });
-                    }
+
+                if (i === index) {
+                    $(elementChildren[i]).children().addClass('active-product');
+                    TweenMax.to($(elementChildren[i]).children(), duration, {
+                        opacity: 1
+                        // transform: 'scale3d(1, 1, 1)'
+                    });
+                } else if (i === index - 1 || i === index + 1) {
+                    $(elementChildren[i]).children().removeClass('active-product');
+                    TweenMax.to($(elementChildren[i]).children(), duration, {
+                        opacity: 0.9
+                        // transform: 'scale3d(0.95, 1, 1)'
+                    });
+                } else if (i === index - 2 || i === index + 2) {
+                    $(elementChildren[i]).children().removeClass('active-product');
+                    TweenMax.to($(elementChildren[i]).children(), duration, {
+                        opacity: 0.8
+                        // transform: 'scale3d(0.9, 1, 1)'
+                    });
+                } else if (i === index - 3 || i === index + 3) {
+                    $(elementChildren[i]).children().removeClass('active-product');
+                    TweenMax.to($(elementChildren[i]).children(), duration, {
+                        opacity: 0.7
+                        // transform: 'scale3d(0.85, 1, 1)'
+                    });
+                } else if (i === index - 4 || i === index + 4) {
+                    $(elementChildren[i]).children().removeClass('active-product');
+                    TweenMax.to($(elementChildren[i]).children(), duration, {
+                        opacity: 0.6
+                        // transform: 'scale3d(0.8, 1, 1)'
+                    });
+                } else if (i < index - 4 || i > index + 4) {
+                    $(elementChildren[i]).children().removeClass('active-product');
+                    TweenMax.to($(elementChildren[i]).children(), duration, {
+                        opacity: 0
+                    });
                 }
             });
         };
@@ -558,7 +762,7 @@ function AppViewModel() {
         self.productsWithDetails()[self.activeProductIndex()].isSelected(true);
 
         // Then loop through all of its rates and set all to false...
-        var rates = self.productsWithDetails()[self.activeProductIndex()].productDetails.Rates[0].RatedTerms;
+        var rates = self.productsWithDetails()[self.activeProductIndex()].Rates;
         $.each(rates, function (index) {
             rates[index].isSelected(false);
         });
@@ -574,7 +778,7 @@ function AppViewModel() {
         self.productsWithDetails()[index()].isSelected(false);
 
         // Then loop through all of its rates and set all to false...
-        var rates = self.productsWithDetails()[index()].productDetails.Rates[0].RatedTerms;
+        var rates = self.productsWithDetails()[index()].Rates;
         $.each(rates, function (index) {
             rates[index].isSelected(false);
         });
@@ -609,9 +813,9 @@ function AppViewModel() {
         $.each(self.productsWithDetails(), function (index) {
             if (self.productsWithDetails()[index].isSelected()) {
                 productsCount++;
-                $.each(self.productsWithDetails()[index].productDetails.Rates[0].RatedTerms, function (i) {
-                    if (self.productsWithDetails()[index].productDetails.Rates[0].RatedTerms[i].isSelected()) {
-                        totalPlanCost += self.productsWithDetails()[index].productDetails.Rates[0].RatedTerms[i].DealerCost;
+                $.each(self.productsWithDetails()[index].Rates[0].RatedTerms, function (i) {
+                    if (self.productsWithDetails()[index].Rates[0].RatedTerms[i].isSelected()) {
+                        totalPlanCost += self.productsWithDetails()[index].Rates[0].RatedTerms[i].DealerCost;
                     }
                 });
             }
@@ -630,6 +834,10 @@ function AppViewModel() {
     self.init = function () {
         // Set the top offset of our active area based on the self.defaultIndex;
         $('.active-card-frame').css({ top: self.defaultIndex * self.cardHeight + 'px' });
+        // Set the top of our button
+        $('.add-product').css({ top: self.defaultIndex * self.cardHeight + self.cardHeight / 2 - 40 + 'px' });
+        // Set the top of the my-plan div
+        $('.my-plan').css({ top: (self.defaultIndex + 1) * self.cardHeight + 'px' });
         // Add keydown event listeners to our app
         self.listenForKeyDown();
         // Animate the martinTop of our inputs container
@@ -648,12 +856,15 @@ function AppViewModel() {
      */
 
     return {
+        //App vars
+        errorMessage: self.errorMessage,
+        pageBusy: self.pageBusy,
+
         // Input array
         activeInputIndex: self.activeInputIndex,
         inputMarginTop: self.inputMarginTop,
         incrementInputIndex: self.incrementInputIndex,
         decrementInputIndex: self.decrementInputIndex,
-        getQuote: self.getQuote,
         vehicleDetails: self.vehicleDetails,
         formData: self.formData,
 
@@ -687,11 +898,10 @@ ko.applyBindings(new AppViewModel(), document.getElementById('commerceProductApp
 // U@Testing123
 // APCO-02
 // 4T1BF1FK7GU566533
-},{}],37:[function(require,module,exports) {
-
+},{"./config.js":94,"./fetchData.js":95}],29:[function(require,module,exports) {
+var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
-var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 
 function Module(moduleName) {
@@ -717,11 +927,13 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54743' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57906' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
     if (data.type === 'update') {
+      console.clear();
+
       data.assets.forEach(function (asset) {
         hmrApply(global.parcelRequire, asset);
       });
@@ -856,5 +1068,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[37,42])
+},{}]},{},[29,8], null)
 //# sourceMappingURL=/viewModel.45392886.map

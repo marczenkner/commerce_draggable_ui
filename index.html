@@ -37,20 +37,19 @@
                 </div>
             </div>
         </div>
-        <!---->
-        <!--<div style="position: absolute; width: 200px; height: 100px; top: 20px; left: 20px;" data-bind="text: 'Looking for products for your ' + vehicleDetails()[8].Value + ' ' + vehicleDetails()[5].Value + ' ' + vehicleDetails()[7].Value"></div>-->
     
     </div>
     
     <div class="scroll-area app-view-column products-view">
         
-        <div class="active-card-frame"></div>
+        <div class="active-card-frame""></div>
         
         <div class="scroll-area-column horizontal-draggable" data-bind="if: productsWithDetails">
             <div class="scroll-wrapper products-wrapper" data-bind="foreach: productsWithDetails">
                 <div class="card">
                     <div class="card-content" data-bind="css: {'selected-option': isSelected()}">
-                        <div data-bind="text: DisplayName + InternalProductId"></div>
+                        <div class="card-title" data-bind="text: DisplayName"></div>
+                        <div class="card-body" data-bind="text: 'Description text is lorem impsum etc..'"></div>
                     </div>
                 </div>
             </div>
@@ -138,10 +137,10 @@
                     <div class="selected-products-title" data-bind="text: DisplayName">
                     </div>
                     <div class="selected-products-price">
-                        <sup>$</sup><span data-bind="foreach: productDetails.Rates[0].RatedTerms">
+                        <sup>$</sup><span data-bind="foreach: Rates">
                             <span data-bind="if: isSelected">
                                 <span data-bind="text: DealerCost"></span>
-                        </span>
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -150,7 +149,15 @@
     </div>
 
 </div>
-
+<div class="main-overlay" data-bind="css: {visible: pageBusy}">
+    <div class="loader">
+        <div class="dbl-spinner"></div>
+        <div class="dbl-spinner dbl-spinner--2"></div>
+    </div>
+    <div class="message">
+        <div data-bind="text: 'Looking for products for your ' + vehicleDetails()[8].Value + ' ' + vehicleDetails()[5].Value + ' ' + vehicleDetails()[7].Value"></div>
+    </div>
+</div>
 
 
 <script src="./libs/greensock/TweenMax.js"></script>

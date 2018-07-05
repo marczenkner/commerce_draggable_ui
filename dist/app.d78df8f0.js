@@ -7,7 +7,7 @@
 // orig method which is the require for previous bundles
 
 // eslint-disable-next-line no-global-assign
-parcelRequire = (function (modules, cache, entry) {
+parcelRequire = (function (modules, cache, entry, globalName) {
   // Save the require from previous bundle to this closure if any
   var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
   var nodeRequire = typeof require === 'function' && require;
@@ -45,7 +45,7 @@ parcelRequire = (function (modules, cache, entry) {
 
       var module = cache[name] = new newRequire.Module(name);
 
-      modules[name][0].call(module.exports, localRequire, module, module.exports);
+      modules[name][0].call(module.exports, localRequire, module, module.exports, this);
     }
 
     return cache[name].exports;
@@ -70,14 +70,40 @@ parcelRequire = (function (modules, cache, entry) {
   newRequire.modules = modules;
   newRequire.cache = cache;
   newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [function (require, module) {
+      module.exports = exports;
+    }, {}];
+  };
 
   for (var i = 0; i < entry.length; i++) {
     newRequire(entry[i]);
   }
 
+  if (entry.length) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(entry[entry.length - 1]);
+
+    // CommonJS
+    if (typeof exports === "object" && typeof module !== "undefined") {
+      module.exports = mainExports;
+
+    // RequireJS
+    } else if (typeof define === "function" && define.amd) {
+     define(function () {
+       return mainExports;
+     });
+
+    // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+
   // Override the current require with this new one
   return newRequire;
-})({36:[function(require,module,exports) {
+})({91:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -107,7 +133,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],19:[function(require,module,exports) {
+},{}],75:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -138,17 +164,15 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":36}],11:[function(require,module,exports) {
+},{"./bundle-url":91}],11:[function(require,module,exports) {
 
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-},{"./assets/fonts/25B52E_E_0.eot":25,"./assets/fonts/25B52E_E_0.woff":26,"./assets/fonts/25B52E_E_0.ttf":27,"./assets/fonts/25B52E_C_0.eot":28,"./assets/fonts/25B52E_C_0.woff":29,"./assets/fonts/25B52E_C_0.ttf":30,"./assets/fonts/25B52E_B_0.eot":31,"./assets/fonts/25B52E_B_0.woff":32,"./assets/fonts/25B52E_B_0.ttf":33,"./../assets/icon-fonts/tlc-icons.eot":20,"./../assets/icon-fonts/tlc-icons.woff":21,"./../assets/icon-fonts/tlc-icons.ttf":22,"./../assets/icon-fonts/tlc-icons.svg":23,"./../assets/images/road-bg.jpg":24,"_css_loader":19}],37:[function(require,module,exports) {
-
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./assets/fonts/25B52E_E_0.eot":53,"./assets/fonts/25B52E_E_0.woff":54,"./assets/fonts/25B52E_E_0.ttf":55,"./assets/fonts/25B52E_C_0.eot":52,"./assets/fonts/25B52E_C_0.woff":56,"./assets/fonts/25B52E_C_0.ttf":57,"./assets/fonts/25B52E_B_0.eot":58,"./assets/fonts/25B52E_B_0.woff":59,"./assets/fonts/25B52E_B_0.ttf":60,"./../assets/icon-fonts/tlc-icons.eot":47,"./../assets/icon-fonts/tlc-icons.woff":48,"./../assets/icon-fonts/tlc-icons.ttf":49,"./../assets/icon-fonts/tlc-icons.svg":50,"./../assets/images/road-bg.jpg":51,"_css_loader":75}],29:[function(require,module,exports) {
+var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
-var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 
 function Module(moduleName) {
@@ -174,11 +198,13 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54743' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57906' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
     if (data.type === 'update') {
+      console.clear();
+
       data.assets.forEach(function (asset) {
         hmrApply(global.parcelRequire, asset);
       });
@@ -313,7 +339,7 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}],39:[function(require,module,exports) {
+},{}],93:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -328,7 +354,9 @@ function loadBundlesLazy(bundles) {
   } catch (err) {
     if (err.code === 'MODULE_NOT_FOUND') {
       return new LazyPromise(function (resolve, reject) {
-        loadBundles(bundles).then(resolve, reject);
+        loadBundles(bundles.slice(0, -1)).then(function () {
+          return require(id);
+        }).then(resolve, reject);
       });
     }
 
@@ -337,11 +365,7 @@ function loadBundlesLazy(bundles) {
 }
 
 function loadBundles(bundles) {
-  var id = bundles[bundles.length - 1];
-
-  return Promise.all(bundles.slice(0, -1).map(loadBundle)).then(function () {
-    return require(id);
-  });
+  return Promise.all(bundles.map(loadBundle));
 }
 
 var bundleLoaders = {};
@@ -370,9 +394,7 @@ function loadBundle(bundle) {
   if (bundleLoader) {
     return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
       if (resolved) {
-        module.bundle.modules[id] = [function (require, module) {
-          module.exports = resolved;
-        }, {}];
+        module.bundle.register(id, resolved);
       }
 
       return resolved;
@@ -394,6 +416,6 @@ LazyPromise.prototype.catch = function (onError) {
   if (this.promise === null) this.promise = new Promise(this.executor);
   return this.promise.catch(onError);
 };
-},{"./bundle-url":36}],0:[function(require,module,exports) {
-var b=require(39);b.load([["25B52E_E_0.5c4ca1ae.eot",25],["25B52E_E_0.06ad1046.woff",26],["25B52E_E_0.724ea5ec.ttf",27],["25B52E_C_0.83df96e0.eot",28],["25B52E_C_0.6feeede7.woff",29],["25B52E_C_0.e8b2dd11.ttf",30],["25B52E_B_0.73b8f45d.eot",31],["25B52E_B_0.ddcca80a.woff",32],["25B52E_B_0.df9df101.ttf",33],["tlc-icons.01005077.eot",20],["tlc-icons.a088b19c.woff",21],["tlc-icons.f3fbe8ed.ttf",22],["tlc-icons.26b6d690.svg",23],["road-bg.1f40ef03.jpg",24]]);
-},{}]},{},[37,0])
+},{"./bundle-url":91}],0:[function(require,module,exports) {
+var b=require(93);b.load([["25B52E_E_0.5c4ca1ae.eot",53],["25B52E_E_0.06ad1046.woff",54],["25B52E_E_0.724ea5ec.ttf",55],["25B52E_C_0.83df96e0.eot",52],["25B52E_C_0.6feeede7.woff",56],["25B52E_C_0.e8b2dd11.ttf",57],["25B52E_B_0.73b8f45d.eot",58],["25B52E_B_0.ddcca80a.woff",59],["25B52E_B_0.df9df101.ttf",60],["tlc-icons.01005077.eot",47],["tlc-icons.a088b19c.woff",48],["tlc-icons.f3fbe8ed.ttf",49],["tlc-icons.26b6d690.svg",50],["road-bg.1f40ef03.jpg",51]]);
+},{}]},{},[29,0], null)

@@ -81,7 +81,6 @@ html, body {
       box-sizing: border-box;
       height: 120px;
       min-width: 200px;
-      //max-width: 350px;
       padding: $padding;
       font-size: $big-text;
 
@@ -107,12 +106,12 @@ html, body {
         }
 
         &.active-product {
-          background-color: $main-color-blue;
+          background-color: $main-color-orange;
           color: $white;
         }
 
         &.selected-option {
-          border: solid 3px $main-color-blue;
+          border: solid 3px $main-color-orange;
 
           &:after {
             position: absolute;
@@ -135,12 +134,12 @@ html, body {
           color: $main-color-orange;
 
           &.active-product {
-            background-color: $main-color-orange!important;
+            background-color: $main-color-blue!important;
             color: $white;
           }
 
           &.selected-option {
-            border: solid 3px $main-color-orange;
+            border: solid 3px $main-color-blue!important;
 
             &:after {
               position: absolute;
@@ -511,6 +510,92 @@ html, body {
       color: $main-color-blue;
 
     }
+  }
+}
+
+/* Main modal, spinner and error message */
+
+.main-overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: $transparency-color;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  transition: all $animation-duration;
+
+  &.visible {
+    visibility: visible;
+    transition: all $animation-duration;
+  }
+
+  .loader {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+
+  /* DOUBLE SPINNER */
+  .double-spinner {
+    position: relative;
+  }
+
+  .dbl-spinner {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 4px solid transparent;
+    border-top: 4px solid $main-color-blue;
+    border-left: 4px solid $main-color-blue;
+    -webkit-animation: 2s spin linear infinite;
+    animation: 2s spin linear infinite;
+  }
+
+  .dbl-spinner--2 {
+    border: 4px solid transparent;
+    border-right: 4px solid $main-color-orange;
+    border-bottom: 4px solid $main-color-orange;
+    -webkit-animation: 1s spin linear infinite;
+    animation: 1s spin linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  .message {
+
+    display: block;
+    min-width: 20rem;
+    max-width: 50%;
+    height: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+    color: $white;
+    font-size: $big-text;
+    text-align: center;
   }
 }
 

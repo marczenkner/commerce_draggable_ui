@@ -247,7 +247,7 @@ html, body {
       font-size: 1.4rem; }
       .scroll-area .scroll-area-column .card .card-content {
         background-color: #fff;
-        color: #5bcaee;
+        color: #2b4590;
         box-sizing: border-box;
         height: 100%;
         width: 100%;
@@ -263,10 +263,10 @@ html, body {
           width: 100%;
           text-align: center; }
         .scroll-area .scroll-area-column .card .card-content.active-product {
-          background-color: #5bcaee;
+          background-color: #ee885a;
           color: #fff; }
         .scroll-area .scroll-area-column .card .card-content.selected-option {
-          border: solid 3px #5bcaee; }
+          border: solid 3px #ee885a; }
           .scroll-area .scroll-area-column .card .card-content.selected-option:after {
             position: absolute;
             top: 0;
@@ -278,10 +278,10 @@ html, body {
       position: relative;
       color: #ee885a; }
       .scroll-area .scroll-area-column:nth-child(2) .card .card-content.active-product {
-        background-color: #ee885a !important;
+        background-color: #2b4590 !important;
         color: #fff; }
       .scroll-area .scroll-area-column:nth-child(2) .card .card-content.selected-option {
-        border: solid 3px #ee885a; }
+        border: solid 3px #2b4590 !important; }
         .scroll-area .scroll-area-column:nth-child(2) .card .card-content.selected-option:after {
           position: absolute;
           top: 0;
@@ -348,7 +348,7 @@ html, body {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background-color: #5bcaee;
+    background-color: #2b4590;
     display: flex;
     justify-content: center;
     align-items: center; }
@@ -379,11 +379,11 @@ html, body {
     .info-area .my-plan .super-big-text,
     .info-area .my-plan .big-text,
     .info-area .my-plan .small-text {
-      color: #5bcaee; }
+      color: #2b4590; }
     .info-area .my-plan input {
       width: 2.5rem;
       height: 2.5rem;
-      border: solid 1px #5bcaee;
+      border: solid 1px #2b4590;
       border-radius: 5%;
       display: flex;
       flex-direction: row;
@@ -395,7 +395,7 @@ html, body {
 .add-product {
   width: 80px;
   height: 80px;
-  background-color: #5bcaee;
+  background-color: #2b4590;
   border-radius: 50%;
   position: absolute;
   top: 16.2rem;
@@ -420,7 +420,7 @@ html, body {
 .hide-drawer {
   width: 200px;
   height: 200px;
-  background-color: #5bcaee;
+  background-color: #2b4590;
   border-radius: 50%;
   position: absolute;
   transform: translateX(50%);
@@ -492,7 +492,7 @@ html, body {
     .selected-products-drawer.visible .hide-drawer {
       width: 12rem;
       height: 12rem;
-      background-color: #5bcaee;
+      background-color: #2b4590;
       border-radius: 50%;
       position: absolute;
       transform: translateX(0);
@@ -530,7 +530,7 @@ html, body {
     right: 0.2rem;
     width: 2rem;
     height: 2rem;
-    background-color: #5bcaee;
+    background-color: #2b4590;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -545,4 +545,71 @@ html, body {
   .selected-products-drawer .selected-products-card-content div {
     margin-bottom: 0.5rem; }
   .selected-products-drawer .selected-products-card-content .selected-products-title {
-    color: #5bcaee; }
+    color: #2b4590; }
+
+/* Main modal, spinner and error message */
+.main-overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  transition: all 0.5s;
+  /* DOUBLE SPINNER */ }
+  .main-overlay.visible {
+    visibility: visible;
+    transition: all 0.5s; }
+  .main-overlay .loader {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; }
+  .main-overlay .double-spinner {
+    position: relative; }
+  .main-overlay .dbl-spinner {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 4px solid transparent;
+    border-top: 4px solid #2b4590;
+    border-left: 4px solid #2b4590;
+    -webkit-animation: 2s spin linear infinite;
+    animation: 2s spin linear infinite; }
+  .main-overlay .dbl-spinner--2 {
+    border: 4px solid transparent;
+    border-right: 4px solid #ee885a;
+    border-bottom: 4px solid #ee885a;
+    -webkit-animation: 1s spin linear infinite;
+    animation: 1s spin linear infinite; }
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+  .main-overlay .message {
+    display: block;
+    min-width: 20rem;
+    max-width: 50%;
+    height: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 1.4rem;
+    text-align: center; }
