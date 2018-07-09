@@ -7,13 +7,14 @@
 </head>
 
 <body id="commerceProductApp">
+
 <div class="app-view">
     
-    <div class="scroll-area app-view-column input-view">
+    <div class="scroll-area app-view-column input-view" data-bind="style: {left: searchVinView() ? 0 : '-100%'}">
         
         <div class="scroll-area-column horizontal-draggable">
             <div class="inputs-wrapper" data-bind="foreach: formData, style {marginTop: inputMarginTop}">
-                <div class="card" data-bind="css: {'is-current': isCurrent}">
+                <div class="card" data-bind="css: {'is-current': isCurrent}, style: {'height': $parent.cardHeight}">
                     
                     <div class="input-button back" data-bind="if: $parent.activeInputIndex() > 0">
                         <div class="button" data-bind="event: {click: $parent.decrementInputIndex.bind($data)}">
@@ -40,14 +41,28 @@
     
     </div>
     
-    <div class="scroll-area app-view-column products-view">
+    <div class="scroll-area app-view-column products-view" data-bind="style: {left: !searchVinView() ? 0 : '-100%'}">
         
-        <div class="active-card-frame""></div>
+        <div class="active-card-frame"></div>
         
-        <div class="scroll-area-column horizontal-draggable" data-bind="if: productsWithDetails">
+        <div class="back-to-search" data-bind="event: {click: backToSearch}"></div>
+    
+        <!-- Products column -->
+        
+        <div class="scroll-area-column horizontal-draggable">
+            <div class="card-count rate-count" data-bind="visible: !pageBusy()">
+                <div>
+                    <span data-bind="text: activeProductIndex() + 1"></span> of <span data-bind="text: productCount"></span><br />
+                    <span data-bind="text: 'Products'"></span>
+                </div>
+            </div>
             <div class="scroll-wrapper products-wrapper" data-bind="foreach: productsWithDetails">
                 <div class="card">
                     <div class="card-content" data-bind="css: {'selected-option': isSelected()}">
+                        <div class="card-content-overlay"></div>
+                        <div class="card-status-wrapper">
+                            <div class="card-status" data-bind="text: 'Suggested'"></div>
+                        </div>
                         <div class="card-title" data-bind="text: DisplayName"></div>
                         <div class="card-body" data-bind="text: 'Description text is lorem impsum etc..'"></div>
                     </div>
@@ -55,10 +70,19 @@
             </div>
         </div>
         
+        <!-- Active rates column -->
+        
         <div class="scroll-area-column horizontal-draggable" data-bind="if: activeProductRates">
+            <div class="card-count rate-count" data-bind="visible: !pageBusy()">
+                <div>
+                    <span data-bind="text: activeRateIndex() + 1"></span> of <span data-bind="text: planCount"></span><br />
+                    <span data-bind="text: 'Plans'"></span>
+                </div>
+            </div>
             <div class="scroll-wrapper cost-wrapper" data-bind="foreach: activeProductRates">
                 <div class="card">
                     <div class="card-content" data-bind="css: {'selected-option': isSelected()}">
+                        <div class="card-content-overlay"></div>
                         <div data-bind="text: '$' + DealerCost.toFixed(2)"></div>
                         <div>
                             <span class="small-text" data-bind="text: RatedTerm.TermMonths + ' months'"></span>
@@ -70,6 +94,14 @@
         </div>
         
         <div class="info-area">
+    
+            <div class="display-data-type">
+                <div class="data-type-wrapper">
+                    <div class="data-type-button" data-bind="event: {click: setValueType.bind($data, 'Price')}, css: {'active-type-button': displayDataType() === 'Price'}">Price</div>
+                    <div class="data-type-button" data-bind="event: {click: setValueType.bind($data, 'Miles')}, css: {'active-type-button': displayDataType() === 'Miles'}">Miles</div>
+                    <div class="data-type-button" data-bind="event: {click: setValueType.bind($data, 'Term')}, css: {'active-type-button': displayDataType() === 'Term'}">Term</div>
+                </div>
+            </div>
             
             <button class="add-product" data-bind="event: {'click': addProductWithRate.bind($data)}, disable: isDragging"></button>
             
@@ -82,20 +114,20 @@
                         </div>
                     </div>
                     <div class="padding-left text-center max-width-50">
-                        <div>Products selected:</div>
-                        <div class="big-text margin-top" data-bind="text: productCount"></div>
+                        <div>Products<br />selected:</div>
+                        <div class="big-text margin-top" data-bind="text: selectedProductCount"></div>
                     </div>
                 </div>
                 <div class="text flex-row">
                     <div class="border-right padding-right text-center max-width-50">
-                        <div>Monthly Cost:</div>
+                        <div>Monthly<br />Cost:</div>
                         <div class="big-text margin-top">
                             <sup>$</sup>
                             <span data-bind="text: monthlyCost"></span>
                         </div>
                     </div>
                     <div class="padding-left text-center max-width-50">
-                        <div>Total <br />Cost:</div>
+                        <div>Total<br />Cost:</div>
                         <div class="big-text margin-top">
                             <sup>$</sup>
                             <span data-bind="text: planCost"></span>
@@ -137,24 +169,25 @@
                     <div class="selected-products-title" data-bind="text: DisplayName">
                     </div>
                     <div class="selected-products-price">
-                        <sup>$</sup><span data-bind="foreach: Rates">
-                            <span data-bind="if: isSelected">
-                                <span data-bind="text: DealerCost"></span>
-                            </span>
-                        </span>
+                        <div data-bind="foreach: $parent.Rates">
+                            <span>RAte</span><sup>$</sup>
+                            <!--<span data-bind="if: isSelected">-->
+                                <!--<span data-bind="text: DealerCost"></span>-->
+                            <!--</span>-->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+
 <div class="main-overlay" data-bind="css: {visible: pageBusy}">
     <div class="loader">
         <div class="dbl-spinner"></div>
         <div class="dbl-spinner dbl-spinner--2"></div>
     </div>
-    <div class="message">
+    <div class="message" data-bind="if: vehicleDetails">
         <div data-bind="text: 'Looking for products for your ' + vehicleDetails()[8].Value + ' ' + vehicleDetails()[5].Value + ' ' + vehicleDetails()[7].Value"></div>
     </div>
 </div>

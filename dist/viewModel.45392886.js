@@ -299,7 +299,7 @@ module.exports = {
         });
     }
 };
-},{}],8:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 var config = require('./config.js');
 var dataService = require('./fetchData.js');
 
@@ -310,7 +310,6 @@ function AppViewModel() {
     // The starting position of the app - This sets how many 'cards' from the top the 'focus' section is plus a 'cardHeight' in Pixels
     self.defaultIndex = 2;
     self.cardHeight = 180;
-    self.showSelectedProductsDrawer = ko.observable(false);
 
     // Local variable for our animation duration
     var duration = 0.25;
@@ -319,7 +318,7 @@ function AppViewModel() {
     self.loanTerm = ko.observable(48);
 
     // Boolean value that decides if the user is searching by price, or by term and miles
-    self.isSearchingByPrice = true;
+    self.displayDataType = ko.observable('Price');
 
     // Boolean to stop certain user events if draggable or throw is happening
     self.isDragging = ko.observable(false);
@@ -344,14 +343,17 @@ function AppViewModel() {
 
     self.planCost = ko.observable(0);
     self.productCount = ko.observable(0);
+    self.planCount = ko.observable(0);
+    self.selectedProductCount = ko.observable(0);
     self.monthlyCost = ko.computed(function () {
         return (self.planCost() / self.loanTerm()).toFixed(2);
     });
 
     // Error message and busy page vars
+    self.searchVinView = ko.observable(true);
     self.errorMessage = ko.observable('');
     self.pageBusy = ko.observable(false);
-
+    self.showSelectedProductsDrawer = ko.observable(false);
     /*
      *
      *  Event handler callbacks that get triggered once a column on the UI completes its 'drag'
@@ -377,6 +379,8 @@ function AppViewModel() {
         var elementChildrenCount = self.activeProductRates().length,
             draggableElement = $(self.columnData[1].domElement);
 
+        self.planCount(elementChildrenCount);
+
         //If our rates list is less than the top offset of the focus row, animate it to that position.
         if (elementChildrenCount < self.defaultIndex + 1) {
 
@@ -389,6 +393,8 @@ function AppViewModel() {
                 y: 0
             });
         }
+
+        console.log(self.activeProductRates());
     };
 
     self.handleCostWrapperDragged = function (returnedValue) {
@@ -541,7 +547,12 @@ function AppViewModel() {
         // Make a call to our getProducts method
         dataService.getProducts(path, method, contentType, authorization, bodyData).then(function (data) {
 
+            console.log(data.Products.length);
+
+            self.productCount(data.Products.length);
+
             $.each(data.Products, function (index) {
+
                 data.Products[index].isSelected = ko.observable(false);
                 data.Products[index].Rates = [];
 
@@ -566,36 +577,33 @@ function AppViewModel() {
                         rates.Rates[0].RatedTerms[i].isSelected = ko.observable(false);
                         data.Products[index].Rates.push(rates.Rates[0].RatedTerms[i]);
                     });
-                    //console.log(data.Products[index]);
+                }).then(function () {
+                    // Update our activeProductRates Array with our new rates
+                    self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].Rates);
+
+                    // Update our planCount var
+                    self.planCount(self.productsWithDetails()[self.activeProductIndex()].Rates.length);
+
+                    // Make our cards draggable
+                    $.each(self.columnData, function (index) {
+                        self.makeCardsDraggable($(self.columnData[index].domElement), self.columnData[index].callback, self.columnData[index].bindingValue);
+                    });
+
+                    // Turn off our pageBusy var
+                    self.pageBusy(false);
                 });
 
                 // Update our observable array with the data
                 self.productsWithDetails.push(data.Products[index]);
             });
 
-            // // Update other data vars
-            self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].Rates);
-            // self.activeCoverage(self.productsWithDetails()[self.activeProductIndex()].Rates[0].RatedCoverage.DisplayName);
-            // self.activeDeductible(self.productsWithDetails()[self.activeProductIndex()].Rates[0].RatedDeductible.DisplayName);
-
-            // Make our cards draggable
-            $.each(self.columnData, function (index) {
-                self.makeCardsDraggable($(self.columnData[index].domElement), self.columnData[index].callback, self.columnData[index].bindingValue);
-            });
-
-            // Turn off our pageBusy var
-            self.pageBusy(false);
+            console.log(self.productsWithDetails());
         });
 
         console.log(self.productsWithDetails());
 
         // Animated our views so that we go to scroll view.
-        TweenMax.to('.input-view', duration, {
-            left: '-100%'
-        });
-        TweenMax.to('.products-view', duration, {
-            left: 0
-        });
+        self.searchVinView(false);
     };
 
     //Makes the selected elements on the DOM draggable
@@ -643,47 +651,46 @@ function AppViewModel() {
             bindingValue(self.defaultIndex);
         }
 
-        // Var to set the number of cards 'above' and 'below' the current card - this is limited to the height of the viewport minus height of each 'card'
-        var animateCardLimits = Math.round($(window).height() / self.cardHeight),
-            animateCardIndex = animateCardLimits;
-
-        animateCardLimits = animateCardLimits.toFixed(2);
-
         var animateAllCards = function animateAllCards(children, index) {
 
             $.each(children, function (i) {
 
                 if (i === index) {
                     $(elementChildren[i]).children().addClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 1
+                    TweenMax.to($(elementChildren[i]).children().children('.card-content-overlay'), duration, {
+                        opacity: 0
                         // transform: 'scale3d(1, 1, 1)'
                     });
                 } else if (i === index - 1 || i === index + 1) {
                     $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0.9
+                    TweenMax.to($(elementChildren[i]).children().children('.card-content-overlay'), duration, {
+                        opacity: 1
                         // transform: 'scale3d(0.95, 1, 1)'
                     });
                 } else if (i === index - 2 || i === index + 2) {
                     $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0.8
+                    TweenMax.to($(elementChildren[i]).children().children('.card-content-overlay'), duration, {
+                        opacity: 1
                         // transform: 'scale3d(0.9, 1, 1)'
                     });
                 } else if (i === index - 3 || i === index + 3) {
                     $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0.7
+                    TweenMax.to($(elementChildren[i]).children().children('.card-content-overlay'), duration, {
+                        opacity: 1
                         // transform: 'scale3d(0.85, 1, 1)'
                     });
                 } else if (i === index - 4 || i === index + 4) {
                     $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
-                        opacity: 0.6
+                    TweenMax.to($(elementChildren[i]).children().children('.card-content-overlay'), duration, {
+                        opacity: 1
                         // transform: 'scale3d(0.8, 1, 1)'
                     });
                 } else if (i < index - 4 || i > index + 4) {
+                    $(elementChildren[i]).children().removeClass('active-product');
+                    TweenMax.to($(elementChildren[i]).children().children('.card-content-overlay'), duration, {
+                        opacity: 1
+                    });
+                } else {
                     $(elementChildren[i]).children().removeClass('active-product');
                     TweenMax.to($(elementChildren[i]).children(), duration, {
                         opacity: 0
@@ -786,6 +793,27 @@ function AppViewModel() {
         self.generatePlanCostAndProductCount();
     };
 
+    // Handle going back to search page view
+    self.backToSearch = function () {
+        // Toggle our Views
+        self.searchVinView(true);
+        // Animate the martinTop of our inputs container
+        $.each(self.formData, function (index) {
+            self.formData[index].isCurrent(false);
+            if (index === 0) {
+                self.formData[index].isCurrent(true);
+            }
+        });
+        self.inputMarginTop(self.defaultIndex * self.cardHeight);
+        // And re-add our event listener to the 'tab' keydown
+        self.listenForKeyDown();
+    };
+
+    // Decide what type of sorting the user wants to use
+    self.setValueType = function (data) {
+        self.displayDataType(data);
+    };
+
     // Keydown event listener which handles different key events
     self.listenForKeyDown = function () {
         $("#commerceProductApp").keydown(function (event) {
@@ -797,6 +825,15 @@ function AppViewModel() {
                     event.preventDefault();
                     self.incrementInputIndex(self.formData[self.activeInputIndex()]);
                     break;
+
+                // If the users taps 'enter' and we are in the searchVinView and on the last input (submit button) call the function that loads products
+                case 13:
+                    if (self.searchVinView() && self.activeInputIndex() === self.formData.length - 1) {
+                        event.preventDefault();
+                        self.getProductsForVin(self.formData[0].value());
+                    }
+                    break;
+
             }
         });
     };
@@ -813,15 +850,15 @@ function AppViewModel() {
         $.each(self.productsWithDetails(), function (index) {
             if (self.productsWithDetails()[index].isSelected()) {
                 productsCount++;
-                $.each(self.productsWithDetails()[index].Rates[0].RatedTerms, function (i) {
-                    if (self.productsWithDetails()[index].Rates[0].RatedTerms[i].isSelected()) {
-                        totalPlanCost += self.productsWithDetails()[index].Rates[0].RatedTerms[i].DealerCost;
+                $.each(self.productsWithDetails()[index].Rates, function (i) {
+                    if (self.productsWithDetails()[index].Rates[i].isSelected()) {
+                        totalPlanCost += self.productsWithDetails()[index].Rates[i].DealerCost;
                     }
                 });
             }
         });
         self.planCost(totalPlanCost);
-        self.productCount(productsCount);
+        self.selectedProductCount(productsCount);
     };
 
     /*
@@ -835,13 +872,14 @@ function AppViewModel() {
         // Set the top offset of our active area based on the self.defaultIndex;
         $('.active-card-frame').css({ top: self.defaultIndex * self.cardHeight + 'px' });
         // Set the top of our button
-        $('.add-product').css({ top: self.defaultIndex * self.cardHeight + self.cardHeight / 2 - 40 + 'px' });
+        $('.add-product').css({ top: self.defaultIndex * self.cardHeight + self.cardHeight / 2 - 32 + 'px' });
         // Set the top of the my-plan div
         $('.my-plan').css({ top: (self.defaultIndex + 1) * self.cardHeight + 'px' });
         // Add keydown event listeners to our app
         self.listenForKeyDown();
         // Animate the martinTop of our inputs container
         self.inputMarginTop(-(self.activeInputIndex() * self.cardHeight - self.cardHeight * self.defaultIndex));
+        // Focus on the first input in our input list
     };
 
     // Inits the app once the document is ready
@@ -857,8 +895,10 @@ function AppViewModel() {
 
     return {
         //App vars
+        searchVinView: self.searchVinView,
         errorMessage: self.errorMessage,
         pageBusy: self.pageBusy,
+        cardHeight: self.cardHeight,
 
         // Input array
         activeInputIndex: self.activeInputIndex,
@@ -869,17 +909,22 @@ function AppViewModel() {
         formData: self.formData,
 
         // Products array
-        isSearchingByPrice: self.isSearchingByPrice,
         productsWithDetails: self.productsWithDetails,
         activeProductIndex: self.activeProductIndex,
+        activeRateIndex: self.activeRateIndex,
         activeProductRates: self.activeProductRates,
         isDragging: self.isDragging,
+        backToSearch: self.backToSearch,
 
-        // Aside vars
+        // Aside and UI vars
+        displayDataType: self.displayDataType,
         planCost: self.planCost,
         monthlyCost: self.monthlyCost,
+        selectedProductCount: self.selectedProductCount,
         productCount: self.productCount,
+        planCount: self.planCount,
         loanTerm: self.loanTerm,
+        setValueType: self.setValueType,
         showHideOptionsDrawer: self.showHideOptionsDrawer,
         showSelectedProductsDrawer: self.showSelectedProductsDrawer,
         addProductWithRate: self.addProductWithRate,
@@ -927,7 +972,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57906' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50821' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -1068,5 +1113,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[29,8], null)
+},{}]},{},[29,13], null)
 //# sourceMappingURL=/viewModel.45392886.map

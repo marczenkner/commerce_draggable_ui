@@ -4,17 +4,21 @@ $main-color-orange: #ee885a;
 $main-color-blue: #2b4590;
 $lightGray: #eaeaea;
 $darkGray: #9d9a9b;
+$black: #1f1f1f;
 $white: #fff;
 
 // Transparency vars
 $transparency-color: rgba(0, 0, 0, 0.25);
+$transparency-color-dark: rgba(0, 0, 0, 0.50);
+$transparency-color-darker: rgba(0, 0, 0, 0.75);
+$transparency-color-white: rgba(255, 255, 255, 0.25);
 
 // Layout Vars
 $padding: 1rem;
 $half-padding: 1rem/2;
 
 // Create our border-radius
-$border-radius: 0.25rem;
+$border-radius: 0.5rem;
 
 // Font Size Variables
 $text: 1rem;

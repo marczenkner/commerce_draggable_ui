@@ -39,6 +39,28 @@ html, body {
     left: 0px;
     opacity: 0.25;
   }
+
+  .back-to-search {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: $main-color-orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    @extend %box-shadow;
+
+    &:after {
+      content: '<';
+      position: absolute;
+      font-size: 2rem;
+      color: $white;
+    }
+  }
 }
 
 .app-view-column {
@@ -46,9 +68,9 @@ html, body {
   position: absolute;
   width: 100%;
   height: 100%;
+  transition: all $animation-duration;
 
   &.products-view {
-    left: 100%;
 
     .scroll-area {
 
@@ -67,12 +89,38 @@ html, body {
   display: flex;
   flex-direction: row;
 
+  .card-count {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8rem;
+    height: 8rem;
+    top: -4rem;
+    background-color: $transparency-color-white;
+    border-radius: 50%;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    color: $white;
+    font-size: $text;
+
+    div {
+      top: -1.4rem;
+      position: relative;
+      text-align: center;
+    }
+  }
+
   .scroll-area-column {
+    position: relative;
     box-sizing: border-box;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    background-color: $transparency-color-dark;
 
     .card {
       display: block;
@@ -85,19 +133,18 @@ html, body {
       font-size: $big-text;
 
       .card-content {
-        background-color: $white;
-        color: $main-color-blue;
         box-sizing: border-box;
         height: 100%;
         width: 100%;
-        padding: calc(1 / 2 * #{$padding});
         border-radius: $border-radius;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         position: relative;
-        @extend %box-shadow;
+        background-color: $white;
+        color: $black;
+        overflow: hidden;
 
         div {
           display: block;
@@ -111,7 +158,6 @@ html, body {
         }
 
         &.selected-option {
-          border: solid 3px $main-color-orange;
 
           &:after {
             position: absolute;
@@ -122,24 +168,125 @@ html, body {
             content: '\e900';
           }
         }
+
+        .card-content-overlay {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: $transparency-color-dark;
+        }
       }
     }
 
-    &:nth-child(2){
+    &:nth-child(3){
 
       .card {
 
         .card-content {
           position: relative;
           color: $main-color-orange;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          background-color: transparent;
+          overflow: hidden;
 
-          &.active-product {
-            background-color: $main-color-blue!important;
+          .card-title {
+            box-sizing: border-box;
+            font-size: $text;
+            padding: .5em 1em;
+            background-color: $main-color-blue;
+            border-radius: $border-radius $border-radius 0 0;
+            width: 70%;
+            @extend %box-shadow;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex: 1;
+            max-height: 33%;
             color: $white;
+            text-align: start;
+          }
+
+          .card-body {
+            box-sizing: border-box;
+            flex: 2;
+            background-color: $white;
+            color: $darkGray;
+            @extend %box-shadow;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 1em 3.8em 1em 1.5em;
+            line-height: 1.6rem;
+            font-size: $small-text;
+            z-index: 99;
+          }
+
+          .card-status-wrapper {
+            width: 30%;
+            height: 3rem;
+            position: absolute;
+            right: 0;
+            min-width: fit-content;
+            box-sizing: border-box;
+            padding: 0.5rem;
+
+            .card-status {
+              width: 100%;
+              height: 100%;
+              font-family: Nexa-Book;
+              font-size: $small-text;
+              text-align: center;
+              padding: 0.6em .5em 0.4em;
+              border-radius: 0.5em 0.5em 0 0.5em;
+              background-color: rgba(0, 0, 0, 0.9);
+              box-sizing: border-box;
+              color: $white;
+              transition: all $animation-duration cubic-bezier(0.68, -0.35, 0.105, 1.55);
+              transform: translateY(0);
+              right: 0;
+
+
+              &:after {
+                content: '';
+                overflow: hidden;
+                position: absolute;
+                bottom: -0.5rem;
+                right: 0;
+                border-left: 0.5rem solid transparent;
+                border-right: 0.5rem solid transparent;
+                border-top: 0.5rem solid rgba(0, 0, 0, 0.75);
+              }
+            }
+          }
+
+          .card-content-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: $transparency-color-dark;
+            z-index: 100;
           }
 
           &.selected-option {
-            border: solid 3px $main-color-blue!important;
+            .card-status {
+              transition: all $animation-duration cubic-bezier(0.68, -0.35, 0.105, 1.55);
+              transform: translateY(3rem);
+            }
+          }
+
+          &.active-product {
+            color: $white;
+
+            .card-title {
+              background-color: $main-color-orange;
+            }
+          }
+
+          &.selected-option {
+            //border: solid 3px $main-color-blue!important;
 
             &:after {
               position: absolute;
@@ -148,6 +295,8 @@ html, body {
               font-size: 2rem;
               font-family: 'icons';
               content: '\e900';
+              color: $white;
+              left: 64%;
             }
           }
         }
@@ -315,9 +464,49 @@ html, body {
   }
 }
 
+.display-data-type {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  .data-type-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 15rem;
+    border-radius: $border-radius;
+    overflow: hidden;
+
+    .data-type-button {
+      height: 2rem;
+      background-color: $lightGray;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 1rem rgba(0, 0, 0, 0.1);
+      border-right: solid 1px $darkGray;
+      font-weight: inherit;
+      cursor: pointer;
+
+      &:nth-last-child(1){
+        border-right: none;
+      }
+
+      &.active-type-button {
+        background-color: $main-color-blue;
+        color: $white;
+        font-weight: 800;
+      }
+    }
+  }
+}
+
 .add-product {
-  width: 80px;
-  height: 80px;
+  width: 4rem;
+  height: 4rem;
   background-color: $main-color-blue;
   border-radius: 50%;
   position: absolute;
@@ -325,7 +514,7 @@ html, body {
   left: $padding;
   display: flex;
   justify-content: center;
-  flex-start: center;
+  align-items: center;
 
   &:after {
     content: '+';
@@ -339,7 +528,7 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    top: 1.65rem;
+    top: 1.1rem;
   }
 }
 
