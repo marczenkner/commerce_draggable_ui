@@ -1,4 +1,4 @@
-const config = require('./config.js');
+const config = require('./config_1.js');
 const dataService = require('./fetchData.js');
 
 function AppViewModel() {
@@ -8,6 +8,7 @@ function AppViewModel() {
     // The starting position of the app - This sets how many 'cards' from the top the 'focus' section is plus a 'cardHeight' in Pixels
     self.defaultIndex = 2;
     self.cardHeight = 180;
+    self.inputMarginTop = ko.observable(0);
 
     // Local variable for our animation duration
     var duration = 0.25;
@@ -26,12 +27,19 @@ function AppViewModel() {
 
     // This array is our main source of Data for the app
     self.productsWithDetails = ko.observableArray();
+    self.activeProductRates = ko.observableArray();
+    self.activeProductTerms = ko.observableArray();
+    self.activeProductMiles = ko.observableArray();
 
     // Vars for setting the indexes
     self.activeProductIndex = ko.observable(self.defaultIndex);
-    self.activeProductRates = ko.observableArray();
     self.activeRateIndex = ko.observable(self.defaultIndex);
+    self.activeTermIndex = ko.observable(self.defaultIndex);
+    self.activeMilesIndex = ko.observable(self.defaultIndex);
     self.activeInputIndex = ko.observable(0);
+
+    self.activeTermValue = ko.observable(0);
+    self.activeMilesValue = ko.observable(0);
 
     // Vars for display Coverages and Deductibles and other information
     self.activeCoverage = ko.observable();
@@ -58,73 +66,173 @@ function AppViewModel() {
      *
      */
     // Handle completion of products dragged
-    self.handleProductsWrapperDragged = function(returnedValue){
-
-        //Remove our original 'costs' draggable from the DOM, as its contents will have changed. Create a new one
-        self.allDraggables.pop();
-
-        // Update our activeProductRates Array with our new rates
-        self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].Rates);
-
-        // And create a new draggable based on the updated contents of the dom element
-        self.makeCardsDraggable($(self.columnData[1].domElement), self.columnData[1].callback, self.columnData[1].bindingValue);
-
-        // And update our coverage and deductible vars
-        // self.activeCoverage(self.productsWithDetails()[self.activeProductIndex()].Rates[0].RatedCoverage.DisplayName);
-        // self.activeDeductible(self.productsWithDetails()[self.activeProductIndex()].Rates[0].RatedDeductible.DisplayName);
-
-        // Get the length of our updated list of rates
-        var elementChildrenCount = self.activeProductRates().length,
-            draggableElement = $(self.columnData[1].domElement);
-
-        self.planCount(elementChildrenCount);
-
-        //If our rates list is less than the top offset of the focus row, animate it to that position.
-        if(elementChildrenCount < (self.defaultIndex + 1)){
-
-            var offsetDifference = (self.defaultIndex) - elementChildrenCount;
-            TweenMax.to(draggableElement, duration, {
-                y: (offsetDifference + 1) * self.cardHeight,
-            });
-        } else {
-            TweenMax.to(draggableElement, duration, {
-                y: 0
-            });
-        }
-
-        console.log(self.activeProductRates());
+    self.handleProductsWrapperDragged = function(){
+        console.log('Producgs Wrapper dragged');
     };
 
-    self.handleCostWrapperDragged = function(returnedValue){
-        //Set our activeCost Index
-        self.activeRateIndex(returnedValue);
+    self.handleCostWrapperDragged = function(){
+        console.log('Cost Wrapper dragged');
     };
 
     self.handleInputFilledOut = function(){
         console.log('One input filled out');
     };
 
-    self.inputMarginTop = ko.observable(0);
-
-    self.incrementInputIndex = function(data){
-        if( data.index < self.formData.length -1 ) {
-            data.isCurrent(false);
-            self.formData[data.index + 1].isCurrent(true)
-            self.activeInputIndex(data.index + 1);
-            self.inputMarginTop( - (((self.activeInputIndex()) * self.cardHeight) - (self.cardHeight * self.defaultIndex)) );
-        }
-        return
+    self.handleTermWrapperDragged = function(){
+        console.log('Term wrapper dragged');
     };
 
-    self.decrementInputIndex = function(data){
-        if( data.index > 0 ) {
-            data.isCurrent(false);
-            self.formData[data.index - 1].isCurrent(true);
-            self.activeInputIndex(data.index - 1);
-            self.inputMarginTop( - (((self.activeInputIndex()) * self.cardHeight) - (self.cardHeight * self.defaultIndex)) );
-        }
-        return
+    self.handleMilesWrapperDragged = function(){
+        console.log('Miles wrapper dragged');
     };
+
+    // Every time a user changes the display data type on the UI, we need to update our draggables, hence the subscribe function
+    self.displayDataType.subscribe(function(){
+
+        switch (self.displayDataType()) {
+
+            // If the user wants to sort the UI by 'Miles'
+            case 'Miles':
+
+                //Remove all draggable objects except our products wrapper and prices wrapper, as we will be recreating these
+                $.each(self.allDraggables, function(fooIndex){
+                    if(fooIndex > 0){
+                        self.allDraggables.pop();
+                    }
+                });
+
+                self.activeProductTerms.removeAll();
+                self.activeProductMiles.removeAll();
+
+                // Re-populate our activeProductMiles array
+                $.each(self.activeProductRates(), function(i) {
+                    if (!self.activeProductMiles().includes(self.activeProductRates()[i].RatedTerm.TermMiles)) {
+                        self.activeProductMiles.push(self.activeProductRates()[i].RatedTerm.TermMiles);
+                        console.log(self.activeProductRates()[i].RatedTerm);
+                        // Sort our terms in ascending order
+                        self.activeProductMiles(self.activeProductMiles().sort(function (a, b) {
+                            return a - b
+                        }));
+                        self.activeMilesValue(self.activeProductTerms()[self.activeMilesIndex()]);
+                    }
+                });
+
+                // Re-populate our activeProductTerms array with only the terms for a given mileage
+                $.each(self.activeProductRates(), function(i) {
+                    if (self.activeProductMiles()[self.defaultIndex] === self.activeProductRates()[i].RatedTerm.TermMiles) {
+                        self.activeProductTerms.push(self.activeProductRates()[i].RatedTerm.TermMiles);
+                    }
+                });
+
+                // And create new draggables based on the updated contents of the dom element
+                $.each(self.columnData, function(draggableIndex){
+                    if( draggableIndex > 0 ) {
+                        self.makeCardsDraggable($(self.columnData[draggableIndex].domElement), self.columnData[draggableIndex].callback, self.columnData[draggableIndex].bindingValue);
+                    }
+                });
+
+                // The re-populate our terms with only those terms that match the current miles
+
+                break;
+
+            case 'Term':
+
+                self.activeProductTerms.removeAll();
+                self.activeProductMiles.removeAll();
+
+                // Re-populate our activeProductTerms array
+                $.each(self.activeProductRates(), function(i) {
+                    if (!self.activeProductTerms().includes(self.activeProductRates()[i].RatedTerm.TermMonths)) {
+                        self.activeProductTerms.push(self.activeProductRates()[i].RatedTerm.TermMonths);
+                        // Sort our terms in ascending order
+                        self.activeProductTerms(self.activeProductTerms().sort(function (a, b) {
+                            return a - b
+                        }));
+                        self.activeTermValue(self.activeProductTerms()[self.activeTermIndex()]);
+                    }
+                });
+
+                break;
+
+            case 'Price':
+
+
+
+                break;
+
+        }
+
+    });
+
+    /*
+     *
+     * draggable column index subscribers - this is how we update the UI - by listening to changes to the indexes which are called on the end of a draggable.
+     *
+     */
+
+    // Subscribe to changes to the activeProductIndex
+    self.activeProductIndex.subscribe(function(){
+
+        //Remove all draggable objects except our products wrapper, as we will be recreating these
+        $.each(self.allDraggables, function(fooIndex){
+            if(fooIndex > 0){
+                self.allDraggables.pop();
+            }
+        });
+
+        // Update our activeProductRates Array with our new rates
+        self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].Rates);
+
+        // Reset our activeProductTerms and activeProductMiles
+        self.activeProductTerms.removeAll();
+        self.activeProductMiles.removeAll();
+
+        // Update our terms and miles arrays
+        $.each(self.activeProductRates(), function(i){
+
+            // Populate our activeProductTerms array
+            if(!self.activeProductTerms().includes(self.activeProductRates()[i].RatedTerm.TermMonths)){
+                self.activeProductTerms.push(self.activeProductRates()[i].RatedTerm.TermMonths);
+                // Sort our terms in ascending order
+                self.activeProductTerms(self.activeProductTerms().sort(function(a, b){return a-b}));
+                self.activeTermValue(self.activeProductTerms()[self.activeTermIndex()]);
+            }
+
+            // Populate our activeProductMiles array
+            if(!self.activeProductMiles().includes(self.activeProductRates()[i].RatedTerm.TermMiles)){
+                self.activeProductMiles.push(self.activeProductRates()[i].RatedTerm.TermMiles);
+                // Sort our terms in ascending order
+                self.activeProductMiles(self.activeProductMiles().sort(function(a, b){return a-b}));
+                self.activeMilesValue(self.activeProductTerms()[self.activeMilesIndex()]);
+            }
+
+        });
+
+        // And create new draggables based on the updated contents of the dom element
+        $.each(self.columnData, function(draggableIndex){
+            if( draggableIndex > 0 ) {
+                self.makeCardsDraggable($(self.columnData[draggableIndex].domElement), self.columnData[draggableIndex].callback, self.columnData[draggableIndex].bindingValue);
+            }
+        });
+        console.log(self.activeProductRates());
+    });
+
+    self.activeTermIndex.subscribe(function(){
+        console.log('self.activeTermIndex called and value is ' + self.activeProductIndex());
+    });
+
+    self.activeMilesIndex.subscribe(function(){
+        console.log('self.activeMilesIndex called and value is ' + self.activeTermIndex());
+    });
+
+    self.activeRateIndex.subscribe(function(){
+        console.log('self.activeRateIndex called and value is ' + self.activeRateIndex());
+    });
+
+    self.activeInputIndex.subscribe(function(){
+        console.log('self.activeInputIndex called and value is ' + self.activeInputIndex());
+    });
+
 
     /*
      *
@@ -145,7 +253,20 @@ function AppViewModel() {
             domElement: '.cost-wrapper',
             callback: self.handleCostWrapperDragged,
             bindingValue: self.activeRateIndex
+        },
+        {
+            index: 2,
+            domElement: '.term-wrapper',
+            callback: self.handleTermWrapperDragged,
+            bindingValue: self.activeTermIndex
+        },
+        {
+            index: 3,
+            domElement: '.miles-wrapper',
+            callback: self.handleMilesWrapperDragged,
+            bindingValue: self.activeMilesIndex
         }
+
     ];
 
     self.formData = [
@@ -215,8 +336,6 @@ function AppViewModel() {
 
         console.log(VIN);
 
-        var tempVIN = '3VW2K7AJ0FM30377';
-
         if(VIN) {
             var vehicleApi = 'https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/' + VIN + '?format=json';
 
@@ -226,7 +345,6 @@ function AppViewModel() {
                 },
                 async: true});
 
-            // console.log(self.vehicleDetails());
         }
     };
 
@@ -255,8 +373,6 @@ function AppViewModel() {
         dataService.getProducts(path, method, contentType, authorization, bodyData)
             .then(function(data){
 
-                console.log(data.Products.length);
-
                 self.productCount(data.Products.length);
 
                 $.each(data.Products, (index)=>{
@@ -275,42 +391,71 @@ function AppViewModel() {
                     bodyData.productsToRate[0].ApplicationCode = data.Products[index].InternalProductId;
 
                     const cacheControl = 'no-cache';
-                    const postmanToken = 'a9834658-8490-07c0-6f58-ca47bbcb5474';
+                    const postmanToken = 'a5a12bf3-5601-86fe-f7ae-93b8540e6c72';
 
                     // Call our getRatesForProduct method once for each product
                     dataService.getRatesForProduct(path, method, contentType, authorization, cacheControl, postmanToken, bodyData, data.Products[index].InternalProductId)
                         .then(function(rates){
-                            //console.log(rates);
+
                             // Add an isSelected observable to each of our rates
                             $.each(rates.Rates[0].RatedTerms, function(i){
                                 rates.Rates[0].RatedTerms[i].isSelected = ko.observable(false);
                                 data.Products[index].Rates.push(rates.Rates[0].RatedTerms[i]);
                             });
-                        }).then(function(){
-                        // Update our activeProductRates Array with our new rates
-                        self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].Rates);
+                        })
+                        .then(function(){
+                            // Update our activeProductRates Array with our new rates
+                            self.activeProductRates(self.productsWithDetails()[self.activeProductIndex()].Rates);
 
-                        // Update our planCount var
-                        self.planCount(self.productsWithDetails()[self.activeProductIndex()].Rates.length);
+                            // Update our planCount var
+                            self.planCount(self.productsWithDetails()[self.activeProductIndex()].Rates.length);
 
-                        // Make our cards draggable
-                        $.each(self.columnData, function(index){
-                            self.makeCardsDraggable($(self.columnData[index].domElement), self.columnData[index].callback, self.columnData[index].bindingValue);
+                            // Set our activeMilesValue and activeTermValue
+                            //self.activeMilesValue();
+                            //self.activeTermValue();
+                        })
+                        .then(function(){
+
+                            self.activeProductTerms.removeAll();
+                            self.activeProductMiles.removeAll();
+                            // Add an isSelected observable to each of our rates
+                            $.each(self.activeProductRates(), function(i){
+
+                                // Populate our activeProductTerms array
+                                if(!self.activeProductTerms().includes(self.activeProductRates()[i].RatedTerm.TermMonths)){
+                                    self.activeProductTerms.push(self.activeProductRates()[i].RatedTerm.TermMonths);
+                                    // Sort our terms in ascending order
+                                    self.activeProductTerms(self.activeProductTerms().sort(function(a, b){return a-b}));
+                                    self.activeTermValue(self.activeProductTerms()[self.activeTermIndex()]);
+                                }
+
+                                // Populate our activeProductMiles array
+                                if(!self.activeProductMiles().includes(self.activeProductRates()[i].RatedTerm.TermMiles)){
+                                    self.activeProductMiles.push(self.activeProductRates()[i].RatedTerm.TermMiles);
+                                    // Sort our terms in ascending order
+                                    self.activeProductMiles(self.activeProductMiles().sort(function(a, b){return a-b}));
+                                    self.activeMilesValue(self.activeProductTerms()[self.activeMilesIndex()]);
+                                }
+                            });
                         });
-
-                        // Turn off our pageBusy var
-                        self.pageBusy(false);
-                    });
 
                     // Update our observable array with the data
                     self.productsWithDetails.push(data.Products[index]);
+
                 });
 
-                console.log(self.productsWithDetails());
+                // Temporarily using a timeout until I get the promise sorted
+                setTimeout(function(){
+                        $.each(self.columnData, function(draggableIndex){
+                            self.makeCardsDraggable($(self.columnData[draggableIndex].domElement), self.columnData[draggableIndex].callback, self.columnData[draggableIndex].bindingValue);
+                        });
+                        // Turn off our pageBusy var
+                        self.pageBusy(false);
+                }, 1000);
 
+                console.log(self.productsWithDetails());
             });
 
-        console.log(self.productsWithDetails());
 
         // Animated our views so that we go to scroll view.
         self.searchVinView(false);
@@ -320,32 +465,18 @@ function AppViewModel() {
     //Makes the selected elements on the DOM draggable
     self.makeCardsDraggable = function(draggableElement, callBack, bindingValue){
 
+        console.log('makeCardsDraggable called for ' + draggableElement);
+
         // Make our draggable columns draggable
         var elementChildren = $(draggableElement).children(),
             elementChildrenCount = $(elementChildren).length;
 
-        // Set all our cards height to the self.cardHeight variable
-        $(elementChildren).css({ height: self.cardHeight + 'px'});
-        // Also set the height of our active-card-frame
-        $('.active-card-frame').css({ height: self.cardHeight + 'px'});
+        self.setCardHeightDraggableOffset(elementChildren);
 
-        // Generate a list of snap values
+        // Generate a list of snap values - our Draggable object needs this to know where to snap to on dragging and throwing
         var snapArray = new Array();
         for(var i = -self.defaultIndex; i < elementChildrenCount - self.defaultIndex; i++){
             snapArray.push( -(i * self.cardHeight));
-        }
-
-        //If our rates list is less than the top offset of the focus row, animate it to that position.
-        if(elementChildrenCount < (self.defaultIndex + 1)){
-
-            var offsetDifference = (self.defaultIndex) - elementChildrenCount;
-            TweenMax.to(draggableElement, duration, {
-                y: (offsetDifference + 1) * self.cardHeight
-            });
-        } else {
-            TweenMax.to(draggableElement, duration, {
-                y: 0
-            });
         }
 
         // Function to return the index of the card that is in the 'active-card-frame'
@@ -362,6 +493,7 @@ function AppViewModel() {
             bindingValue(self.defaultIndex);
         }
 
+        // Function to set values on cards that are not the current card - Right now just opacity
         var animateAllCards = function(children, index){
 
             $.each(children, function(i){
@@ -403,7 +535,7 @@ function AppViewModel() {
                     });
                 } else {
                     $(elementChildren[i]).children().removeClass('active-product');
-                    TweenMax.to($(elementChildren[i]).children(), duration, {
+                    TweenMax.to($(elementChildren[i]).children().children('.card-content-overlay'), duration, {
                         opacity: 0
                     });
                 }
@@ -419,9 +551,10 @@ function AppViewModel() {
         if( elementChildrenCount <= self.defaultIndex ){
             if( elementChildrenCount == 1 || elementChildrenCount ==  self.defaultIndex ){
                 $(elementChildren[0]).children('.card-content').addClass('active-product');
-                TweenMax.to($(elementChildren[0]).children('.card-content'), duration, {
-                    opacity: 1,
-                    transform: 'scale3d(1, 1, 1)'
+                TweenMax.to($(elementChildren[0]).children('.card-content').children('.card-content-overlay'), duration, {
+                    opacity: 0,
+                    transform: 'scale3d(1, 1, 1)',
+                    border: 'solid 2px green'
                 });
             }
         }
@@ -454,8 +587,32 @@ function AppViewModel() {
             }
         });
 
+        //If draggable item lists is shorter than the top offset of the focus row, animate it to that position.
+        if(elementChildrenCount < (self.defaultIndex + 1)){
+
+            var offsetDifference = (self.defaultIndex) - elementChildrenCount;
+
+            TweenMax.to(draggableElement, duration, {
+                y: (offsetDifference + 1) * self.cardHeight
+            });
+        } else {
+            TweenMax.to(draggableElement, duration, {
+                y: 0
+            });
+        }
+
         //Push all draggables to an array so that we can access them later.
         self.allDraggables.push(newDraggable);
+    };
+
+    // Function that sets the height of each card based off of our cardHeight Var, as as the topoffset of each draggable Container.
+    self.setCardHeightDraggableOffset = function(elementChildren){
+
+        // Set all our cards height to the self.cardHeight variable
+        $(elementChildren).css({ height: self.cardHeight + 'px'});
+        // Also set the height of our active-card-frame
+        $('.active-card-frame').css({ height: self.cardHeight + 'px'});
+
     };
 
 
@@ -552,6 +709,27 @@ function AppViewModel() {
         });
     };
 
+    // Handle when a user clicks on the up or down arrows on the input screen
+    self.incrementInputIndex = function(data){
+        if( data.index < self.formData.length -1 ) {
+            data.isCurrent(false);
+            self.formData[data.index + 1].isCurrent(true)
+            self.activeInputIndex(data.index + 1);
+            self.inputMarginTop( - (((self.activeInputIndex()) * self.cardHeight) - (self.cardHeight * self.defaultIndex)) );
+        }
+        return
+    };
+
+    self.decrementInputIndex = function(data){
+        if( data.index > 0 ) {
+            data.isCurrent(false);
+            self.formData[data.index - 1].isCurrent(true);
+            self.activeInputIndex(data.index - 1);
+            self.inputMarginTop( - (((self.activeInputIndex()) * self.cardHeight) - (self.cardHeight * self.defaultIndex)) );
+        }
+        return
+    };
+
 
     /*
      *
@@ -632,7 +810,13 @@ function AppViewModel() {
         productsWithDetails: self.productsWithDetails,
         activeProductIndex: self.activeProductIndex,
         activeRateIndex: self.activeRateIndex,
+        activeTermIndex: self.activeTermIndex,
+        activeMilesIndex: self.activeMilesIndex,
+        activeTermValue: self.activeTermValue,
+        activeMilesValue: self.activeMilesValue,
         activeProductRates: self.activeProductRates,
+        activeProductTerms: self.activeProductTerms,
+        activeProductMiles: self.activeProductMiles,
         isDragging: self.isDragging,
         backToSearch: self.backToSearch,
 
@@ -662,4 +846,3 @@ ko.applyBindings(new AppViewModel(), document.getElementById('commerceProductApp
 // easycareuat
 // U@Testing123
 // APCO-02
-// 4T1BF1FK7GU566533

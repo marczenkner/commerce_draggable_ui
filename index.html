@@ -43,19 +43,19 @@
     
     <div class="scroll-area app-view-column products-view" data-bind="style: {left: !searchVinView() ? 0 : '-100%'}">
         
-        <div class="active-card-frame"></div>
+        <div class="active-card-frame" data-bind="style: {order: 1}"></div>
         
-        <div class="back-to-search" data-bind="event: {click: backToSearch}"></div>
+        <div class="back-to-search" data-bind="event: {click: backToSearch}, style: {order: 2}"></div>
     
         <!-- Products column -->
         
-        <div class="scroll-area-column horizontal-draggable">
-            <div class="card-count rate-count" data-bind="visible: !pageBusy()">
-                <div>
-                    <span data-bind="text: activeProductIndex() + 1"></span> of <span data-bind="text: productCount"></span><br />
-                    <span data-bind="text: 'Products'"></span>
-                </div>
-            </div>
+        <div class="scroll-area-column horizontal-draggable" data-bind="style: {order: 3}">
+            <!--<div class="card-count rate-count" data-bind="visible: !pageBusy()">-->
+                <!--<div>-->
+                    <!--<span data-bind="text: activeProductIndex() + 1"></span> of <span data-bind="text: productCount"></span><br />-->
+                    <!--<span data-bind="text: 'Products'"></span>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="scroll-wrapper products-wrapper" data-bind="foreach: productsWithDetails">
                 <div class="card">
                     <div class="card-content" data-bind="css: {'selected-option': isSelected()}">
@@ -70,15 +70,52 @@
             </div>
         </div>
         
-        <!-- Active rates column -->
-        
-        <div class="scroll-area-column horizontal-draggable" data-bind="if: activeProductRates">
-            <div class="card-count rate-count" data-bind="visible: !pageBusy()">
-                <div>
-                    <span data-bind="text: activeRateIndex() + 1"></span> of <span data-bind="text: planCount"></span><br />
-                    <span data-bind="text: 'Plans'"></span>
+        <!-- Active Terms -->
+        <div class="scroll-area-column horizontal-draggable" data-bind="visible: displayDataType() !== 'Price',style: {order: displayDataType() === 'Term' ? 4 : 5}">
+            <!--<div class="card-count term-count" data-bind="visible: !pageBusy()">-->
+                <!--<div>-->
+                    <!--<span data-bind="text: activeTermIndex"></span>-->
+                    <!--<span data-bind="text: activeTermValue"></span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="scroll-wrapper term-wrapper" data-bind="foreach: activeProductTerms">
+                <div class="card">
+                    <div class="card-content">
+                        <!--<div class="card-content" data-bind="css: {'selected-option': isSelected()}">-->
+                        <div class="card-content-overlay"></div>
+                        <div data-bind="text: $data + ' Months'"></div>
+                    </div>
                 </div>
             </div>
+        </div>
+    
+        <!-- Active Miles -->
+        <div class="scroll-area-column horizontal-draggable" data-bind="visible: displayDataType() !== 'Price',style: {order: displayDataType() === 'Miles' ? 4 : 5}">
+            <!--<div class="card-count miles-count" data-bind="visible: !pageBusy()">-->
+                <!--<div>-->
+                    <!--<span data-bind="text: activeMilesIndex"></span>-->
+                    <!--<span data-bind="text: activeMilesValue"></span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="scroll-wrapper miles-wrapper" data-bind="foreach: activeProductMiles">
+                <div class="card">
+                    <div class="card-content">
+                    <!--<div class="card-content" data-bind="css: {'selected-option': isSelected()}">-->
+                        <div class="card-content-overlay"></div>
+                        <div data-bind="text: Math.trunc($data/1000) + 'k Miles'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Active rates by Price -->
+        <div class="scroll-area-column horizontal-draggable" data-bind="visible: activeProductRates && displayDataType() === 'Price', style: {order: 10}">
+            <!--<div class="card-count rate-count" data-bind="visible: !pageBusy()">-->
+                <!--<div>-->
+                    <!--<span data-bind="text: activeRateIndex() + 1"></span> of <span data-bind="text: planCount"></span><br />-->
+                    <!--<span data-bind="text: 'Plans'"></span>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="scroll-wrapper cost-wrapper" data-bind="foreach: activeProductRates">
                 <div class="card">
                     <div class="card-content" data-bind="css: {'selected-option': isSelected()}">
@@ -93,7 +130,7 @@
             </div>
         </div>
         
-        <div class="info-area">
+        <div class="info-area" data-bind="style: {order: 11}">
     
             <div class="display-data-type">
                 <div class="data-type-wrapper">
@@ -150,16 +187,39 @@
                         </div>
                     </div>
                 </div>
+                <div class="text flex-row">
+                    <div class="border-right padding-right text-center max-width-50">
+                        <div>Deductible:</div>
+                        <div class="big-text margin-top">
+                            <span data-bind="text: activeProductTerms"></span>
+                        </div>
+                        <div class="big-text margin-top">
+                            <span data-bind="text: activeProductMiles"></span>
+                        </div>
+                        <div class="big-text margin-top">
+                            <span data-bind="text: activeProductIndex"></span>
+                        </div>
+                        <div class="big-text margin-top">
+                            <span data-bind="text: activeRateIndex"></span>
+                        </div>
+                        <div class="big-text margin-top">
+                            <span data-bind="text: activeTermIndex"></span>
+                        </div>
+                        <div class="big-text margin-top">
+                            <span data-bind="text: activeMilesIndex"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     
     </div>
     
-    <div class="selected-products-drawer-overlay" data-bind="css: {'visible': showSelectedProductsDrawer}, event: {'click': showHideOptionsDrawer}">
+    <div class="selected-products-drawer-overlay" data-bind="css: {'visible': showSelectedProductsDrawer() && selectedProductCount()}, event: {'click': showHideOptionsDrawer}">
     </div>
     
     <div class="selected-products-drawer" data-bind="css: {'visible': showSelectedProductsDrawer}">
-        <div class="hide-drawer-wrapper">
+        <div class="hide-drawer-wrapper" data-bind="visible: showSelectedProductsDrawer() || selectedProductCount()">
             <div class="hide-drawer" data-bind="event: {'click': showHideOptionsDrawer}"></div>
         </div>
         <div class="selected-products-wrapper" data-bind="foreach: productsWithDetails">

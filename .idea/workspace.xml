@@ -2,27 +2,86 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8eab8f9f-69a3-42f8-a01f-0f68acf73779" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/config_1.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_B_0.73b8f45d.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_B_0.ddcca80a.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_B_0.df9df101.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_C_0.6feeede7.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_C_0.83df96e0.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_C_0.e8b2dd11.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_E_0.06ad1046.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_E_0.5c4ca1ae.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/25B52E_E_0.724ea5ec.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/6230071.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Draggable.51b9bca6.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Draggable.51b9bca6.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Draggable.min.48a2d36e.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Draggable.min.48a2d36e.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/ThrowPropsPlugin.1d3b5668.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/ThrowPropsPlugin.1d3b5668.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/ThrowPropsPlugin.min.eb9a4ac5.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/ThrowPropsPlugin.min.eb9a4ac5.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/TweenLite.min.fe98d4ad.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/TweenLite.min.fe98d4ad.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/TweenMax.476719bf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/TweenMax.476719bf.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/app.d78df8f0.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/app.d78df8f0.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/app.d78df8f0.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/app.dccbc73e.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/app.dccbc73e.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/commerce-draggable-ui.ab8215f8.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/commerce-draggable-ui.ab8215f8.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/config.a2b1c4ac.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/config.a2b1c4ac.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/knockout-3.4.2.6145f992.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/knockout-3.4.2.6145f992.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/libs/greensock/TweenLite.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/libs/greensock/TweenMax.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/libs/greensock/plugins/CSSPlugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/libs/greensock/plugins/ThrowPropsPlugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/libs/greensock/utils/Draggable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/libs/knockout-3.4.2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/6230071.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/6230104.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/6330210.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/6330211.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/6330212.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/6330213.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/6330214.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/7430030G.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/8030135.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/A1032281.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/A1032714.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/A1033068.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/C1032604.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/C1032605.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/C1032606.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/C1032607.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/C1033446.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/C1033447.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/inputData.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/mock_data/products.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/road-bg.1f40ef03.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/tlc-icons.01005077.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/tlc-icons.26b6d690.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/tlc-icons.a088b19c.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/tlc-icons.f3fbe8ed.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/viewModel.45392886.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/viewModel.45392886.map" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/46e1d0b67c4f6e0366fac53abfc27317.json" afterPath="$PROJECT_DIR$/.cache/46e1d0b67c4f6e0366fac53abfc27317.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/61447ce32932e7e655e4d82e7a701a38.json" afterPath="$PROJECT_DIR$/.cache/61447ce32932e7e655e4d82e7a701a38.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/b52414d1e5edaafb9d66d835fc71b92e.json" afterPath="$PROJECT_DIR$/.cache/b52414d1e5edaafb9d66d835fc71b92e.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/c0d2692a050f2d7962ef143d9798e0e9.json" afterPath="$PROJECT_DIR$/.cache/c0d2692a050f2d7962ef143d9798e0e9.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/c688ef311936a3db804ff1eb0cdcf8a0.json" afterPath="$PROJECT_DIR$/.cache/c688ef311936a3db804ff1eb0cdcf8a0.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/f18a13bb1a247c782d50aa5f6275a959.json" afterPath="$PROJECT_DIR$/.cache/f18a13bb1a247c782d50aa5f6275a959.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/Draggable.51b9bca6.js" afterPath="$PROJECT_DIR$/dist/Draggable.51b9bca6.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/ThrowPropsPlugin.1d3b5668.js" afterPath="$PROJECT_DIR$/dist/ThrowPropsPlugin.1d3b5668.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/TweenMax.476719bf.js" afterPath="$PROJECT_DIR$/dist/TweenMax.476719bf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.d78df8f0.css" afterPath="$PROJECT_DIR$/dist/app.d78df8f0.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.d78df8f0.js" afterPath="$PROJECT_DIR$/dist/app.d78df8f0.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.dccbc73e.js" afterPath="$PROJECT_DIR$/dist/app.dccbc73e.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/commerce-draggable-ui.ab8215f8.js" afterPath="$PROJECT_DIR$/dist/commerce-draggable-ui.ab8215f8.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/viewModel.45392886.js" afterPath="$PROJECT_DIR$/dist/viewModel.45392886.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/viewModel.45392886.map" afterPath="$PROJECT_DIR$/dist/viewModel.45392886.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/fetchData.js" afterPath="$PROJECT_DIR$/js/fetchData.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/viewModel.js" afterPath="$PROJECT_DIR$/js/viewModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scss/globals.scss" afterPath="$PROJECT_DIR$/scss/globals.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scss/main.scss" afterPath="$PROJECT_DIR$/scss/main.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scss/variables.scss" afterPath="$PROJECT_DIR$/scss/variables.scss" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,21 +102,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="59" column="34" lean-forward="true" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+            <state relative-caret-position="2955">
+              <caret line="197" column="30" lean-forward="false" selection-start-line="197" selection-start-column="30" selection-end-line="197" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="viewModel.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="viewModel.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/viewModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="223" column="42" lean-forward="true" selection-start-line="223" selection-start-column="42" selection-end-line="223" selection-end-column="42" />
+            <state relative-caret-position="157">
+              <caret line="203" column="52" lean-forward="false" selection-start-line="203" selection-start-column="52" selection-end-line="203" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config_1.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/config_1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -66,18 +135,8 @@
       <file leaf-file-name="main.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scss/main.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="718" column="0" lean-forward="false" selection-start-line="718" selection-start-column="0" selection-end-line="718" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="variables.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scss/variables.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+            <state relative-caret-position="6555">
+              <caret line="437" column="30" lean-forward="false" selection-start-line="437" selection-start-column="30" selection-end-line="437" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -87,18 +146,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>active-card</find>
-      <find>planCost</find>
-      <find>nth</find>
-      <find>back-to-</find>
-      <find>draggable</find>
-      <find>defaultIndex</find>
-      <find>is-current</find>
-      <find>add-produc</find>
-      <find>decreme</find>
-      <find>back-to</find>
-      <find>monthlyCost</find>
-      <find>inputMarginTop</find>
       <find>monthly</find>
       <find>backto</find>
       <find>getRates</find>
@@ -117,6 +164,18 @@
       <find>productCount</find>
       <find>setvalue</find>
       <find>main-overlay</find>
+      <find>e900</find>
+      <find>activeProductRates</find>
+      <find>activeProductTerms</find>
+      <find>activepro</find>
+      <find>displayDataType</find>
+      <find>vehicleDetails</find>
+      <find>.scroll-area-colu</find>
+      <find>y:</find>
+      <find>.card-content-over</find>
+      <find>hide-draer</find>
+      <find>activeTermIndex</find>
+      <find>info-area</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -155,13 +214,13 @@
         <option value="$PROJECT_DIR$/dist/mock_data/inputData.json" />
         <option value="$PROJECT_DIR$/js/app.js" />
         <option value="$PROJECT_DIR$/index.js" />
-        <option value="$PROJECT_DIR$/js/config.js" />
-        <option value="$PROJECT_DIR$/js/fetchData.js" />
         <option value="$PROJECT_DIR$/scss/globals.scss" />
         <option value="$PROJECT_DIR$/scss/variables.scss" />
+        <option value="$PROJECT_DIR$/js/fetchData.js" />
+        <option value="$PROJECT_DIR$/js/config.js" />
         <option value="$PROJECT_DIR$/scss/main.scss" />
-        <option value="$PROJECT_DIR$/js/viewModel.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/viewModel.js" />
       </list>
     </option>
   </component>
@@ -175,10 +234,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="43" />
+    <option name="x" value="67" />
     <option name="y" value="23" />
-    <option name="width" value="1877" />
-    <option name="height" value="1177" />
+    <option name="width" value="2350" />
+    <option name="height" value="1417" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -195,8 +254,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -271,6 +328,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,15 +342,16 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$USER_HOME$/Desktop" />
-      <recent name="$PROJECT_DIR$/dist" />
-      <recent name="$PROJECT_DIR$/js/mock_data" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/libs/greensock/plugins" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/js" />
+      <recent name="$USER_HOME$/Desktop" />
+      <recent name="$PROJECT_DIR$/dist" />
+      <recent name="$PROJECT_DIR$/js/mock_data" />
     </key>
   </component>
   <component name="RunManager">
@@ -411,24 +471,29 @@
       <workItem from="1530789893108" duration="1792000" />
       <workItem from="1530793537500" duration="11378000" />
       <workItem from="1530877659031" duration="10148000" />
-      <workItem from="1531134980045" duration="2043000" />
+      <workItem from="1531134980045" duration="4162000" />
+      <workItem from="1531140131026" duration="52000" />
+      <workItem from="1531148254577" duration="7878000" />
+      <workItem from="1531305917933" duration="14104000" />
+      <workItem from="1531396899127" duration="5624000" />
+      <workItem from="1531416398293" duration="8000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="217151000" />
+    <option name="totallyTimeSpent" value="246936000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="43" y="23" width="1877" height="1177" extended-state="6" />
-    <editor active="true" />
+    <frame x="67" y="23" width="2350" height="1417" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18857759" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1253757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Quokka" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32626727" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38943395" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -469,10 +534,188 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2955">
+          <caret line="197" column="30" lean-forward="true" selection-start-line="197" selection-start-column="30" selection-end-line="197" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/config_1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6555">
+          <caret line="437" column="30" lean-forward="false" selection-start-line="437" selection-start-column="30" selection-end-line="437" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1095">
+          <caret line="73" column="141" lean-forward="false" selection-start-line="73" selection-start-column="126" selection-end-line="73" selection-end-column="141" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5865">
+          <caret line="391" column="0" lean-forward="true" selection-start-line="391" selection-start-column="0" selection-end-line="391" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/fetchData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="5" lean-forward="true" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2610">
+          <caret line="174" column="23" lean-forward="true" selection-start-line="174" selection-start-column="23" selection-end-line="174" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="96" column="66" lean-forward="true" selection-start-line="96" selection-start-column="66" selection-end-line="96" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4515">
+          <caret line="301" column="9" lean-forward="false" selection-start-line="301" selection-start-column="9" selection-end-line="301" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2310">
+          <caret line="154" column="46" lean-forward="false" selection-start-line="154" selection-start-column="46" selection-end-line="154" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4515">
+          <caret line="301" column="9" lean-forward="false" selection-start-line="301" selection-start-column="9" selection-end-line="301" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2310">
+          <caret line="154" column="46" lean-forward="true" selection-start-line="154" selection-start-column="46" selection-end-line="154" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4515">
+          <caret line="301" column="9" lean-forward="false" selection-start-line="301" selection-start-column="9" selection-end-line="301" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1350">
@@ -505,34 +748,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scss/main.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="718" column="0" lean-forward="false" selection-start-line="718" selection-start-column="0" selection-end-line="718" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scss/variables.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/viewModel.js">
+    <entry file="file://$PROJECT_DIR$/dist/config.a2b1c4ac.js" />
+    <entry file="file://$PROJECT_DIR$/js/fetchData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="223" column="42" lean-forward="true" selection-start-line="223" selection-start-column="42" selection-end-line="223" selection-end-column="42" />
+        <state relative-caret-position="555">
+          <caret line="37" column="5" lean-forward="false" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/app.d78df8f0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5085">
+          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <marker date="1531412626221" expanded="true" signature="7589:7789" ph="..." />
+            <marker date="1531412626221" expanded="true" signature="7809:7863" ph="..." />
+            <marker date="1531412626221" expanded="true" signature="7895:7942" ph="..." />
+            <marker date="1531412626221" expanded="true" signature="7970:8023" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/config_1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="133" column="31" lean-forward="true" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6555">
+          <caret line="437" column="30" lean-forward="false" selection-start-line="437" selection-start-column="30" selection-end-line="437" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="59" column="34" lean-forward="true" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+        <state relative-caret-position="2955">
+          <caret line="197" column="30" lean-forward="false" selection-start-line="197" selection-start-column="30" selection-end-line="197" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="203" column="52" lean-forward="false" selection-start-line="203" selection-start-column="52" selection-end-line="203" selection-end-column="52" />
           <folding />
         </state>
       </provider>

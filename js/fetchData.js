@@ -25,7 +25,7 @@ module.exports = {
                         'content-type': contentType,
                         'Authorization': authorization,
                         'Cache-Control': cacheControl,
-                        // 'Postman-Token': postmanToken
+                        'Postman-Token': postmanToken
                     },
                     body: JSON.stringify(bodyData),
                     method: method
